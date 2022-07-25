@@ -1,0 +1,423 @@
+﻿@page
+@model MeetSpotOn.Pages.DoctorBoard.IndexModel
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <title>Spot-On Mobile</title>
+    <link rel="stylesheet" type="text/css" href="/styles/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/fonts/css/fontawesome-all.min.css">
+    <link rel="manifest" href="/_manifest.json" data-pwa-version="/set_in_manifest_and_pwa_js">
+    <link rel="apple-touch-icon" sizes="180x180" href="/app/icons/icon-192x192.png">
+
+    <style>
+        .hidden{
+            display:none;
+        }
+    </style>
+</head>
+
+<body class="theme-dark">
+
+    <div id="preloader"><div class="spinner-border color-highlight" role="status"></div></div>
+
+    <div id="page">
+
+        <div class="header header-fixed header-logo-center">
+            <a href="index.html" class="header-title">SPOT-ON: HEALTH</a>
+            @*<a href="#" data-back-button class="header-icon header-icon-1"><i class="fa fa-chevron-left"></i></a>*@
+            <a href="#" data-toggle-theme class="header-icon header-icon-4 show-on-theme-dark"><i class="fas fa-sun"></i></a>
+            <a href="#" data-toggle-theme class="header-icon header-icon-4 show-on-theme-light"><i class="fas fa-moon"></i></a>
+        </div>
+
+
+        <div class="page-content header-clear-medium">
+
+
+            <div class="card card-style">
+                <div class="card bg-16" data-card-height="200">
+                    <div class="card-bottom pb-3 mb-2 pr-3">
+                        <a href="javascript:signgout();" class="opacity-60 icon icon-s bg-theme color-theme float-right rounded-xl ml-3"><i class="fa fa-lock"></i></a>
+                        <a href="#" data-menu="menu-share" class="opacity-60 icon icon-s bg-theme color-theme float-right rounded-xl"><i class="fa fa-share-alt"></i></a>
+                    </div>
+                    <div class="card-overlay bg-gradient rounded-0"></div>
+                </div>
+                <div class="content mt-n2">
+                    <div class="d-flex">
+                        <div class="ml-auto w-100">
+                            <p class="color-highlight font-600 mb-n1" id="full-name">Awesome Peter</p>
+                            <h1 id="spec">Paediatrician</h1>
+                            <p>
+                                Welcome. This is the waiting area to recieve phone calls from clients. Please try to keep it simple
+                            </p>
+                        </div>
+                        <div class="w-100 ml-auto pt-5 mt-3 pl-3">
+                            <p class="mb-0"><i class="fa icon-30 opacity-50 color-blue-dark fa-calendar pr-3"></i>@DateTime.Now.ToShortDateString()</p>
+                            <p class="mb-0"><i class="fa icon-30 opacity-50 color-brown-dark fa-clock pr-3"></i>@DateTime.Now.ToShortTimeString()</p>
+                            <p class="mb-0"><i class="fa icon-30 opacity-50 color-red-dark fa-tag pr-3"></i>Health-Care Giver</p>
+                            <p class="mb-0"><i class="fa icon-30 opacity-50 color-green-dark fa-user pr-3"></i><span id="approved">Enabled</span></p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-style hidden" id="medHistory">
+                <div class="content">
+                    <h4 class="font-700">View Caller's Medical History</h4>
+                    <p>
+                        <a href="#" data-menu="ad-timed-2" data-timed-ad="10"
+                           class="btn btn-m btn-full shadow-xl font-600 bg-highlight mb-2">Show History</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="content mt-0 mb-0">
+                <div class="row mb-0">
+                    <div class="col-6">
+                        <div class="card mx-0 card-style" data-card-height="260">
+                            <div class="content">
+                                <h5 class="font-14 opacity-50">Call Summary <a href="#" class="float-right color-highlight"><i class="fa fa-arrow-right"></i></a></h5>
+                                <div class="divider mb-3"></div>
+
+                                <div class="mb-4">
+                                    <h5>Drop Call<span class="opacity-30 float-right"><span id="drop"></span>%</span></h5>
+                                    <div class="progress" style="height:8px;">
+                                        <div id="drop_progress" class="progress-bar border-0 bg-yellow-dark text-left pl-2"
+                                             role="progressbar" style="width: 30%"
+                                             aria-valuenow="10" aria-valuemin="0"
+                                             aria-valuemax="100">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <h5>Received<span class="opacity-30 float-right"><span id="received"></span>%</span></h5>
+                                    <div class="progress" style="height:8px;">
+                                        <div id="received_progress" class="progress-bar border-0 bg-green-dark text-left pl-2"
+                                             role="progressbar" style="width: 70%"
+                                             aria-valuenow="10" aria-valuemin="0"
+                                             aria-valuemax="100">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <h5>Call Trafic<span class="opacity-30 float-right"><span id="trafic"></span>%</span></h5>
+                                    <div class="progress" style="height:8px;">
+                                        <div id="trafic_progress" class="progress-bar border-0 bg-blue-dark text-left pl-2"
+                                             role="progressbar" style="width: 90%"
+                                             aria-valuenow="10" aria-valuemin="0"
+                                             aria-valuemax="100">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card mx-0 card-style" data-card-height="260">
+                            <div class="content">
+                                <h5 class="font-14 opacity-50">Earnings <a href="#" class="float-right color-highlight"><i class="fa fa-arrow-right"></i></a></h5>
+                                <div class="divider mb-3"></div>
+                            </div>
+                            <div class="card-center text-center pb-4">
+                                <a href="#" data-menu="menu-bank-details" class="icon icon-xxl rounded-m gradient-highlight scale-box"><i class="fa fa-arrow-up rotate-45 font-30"></i></a>
+                            </div>
+                            <div class="card-bottom text-center">
+                                <div class="content pb-1">
+                                    <h1 class="mb-n1">N<span id="income"></span></h1>
+                                    <h5 class="opacity-30"><span id="month"></span></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Page content ends here-->
+        <!-- Main Menu-->
+        <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-load="menu-main.html" data-menu-width="280" data-menu-active="nav-media"></div>
+
+        <!-- Share Menu-->
+        <div id="menu-share" class="menu menu-box-bottom rounded-m" data-menu-load="menu-share.html" data-menu-height="370"></div>
+
+        <!-- Colors Menu-->
+        <div id="menu-colors" class="menu menu-box-bottom rounded-m" data-menu-load="menu-colors.html" data-menu-height="480"></div>
+
+
+    </div>
+
+
+    <div id="menu-prescription" class="menu menu-box-bottom rounded-m"
+         data-menu-height="230"
+         data-menu-effect="menu-over">
+        <div class="menu-title">
+            <i class="fa fa-question-circle scale-box float-left mr-3 ml-3 fa-3x mt-1 color-blue-dark"></i>
+            <p class="color-highlight">Call End,</p>
+            <h1 class="font-20">Successful Call</h1>
+            <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+        </div>
+        <div class="content mt-0">
+            <p class="pr-3">
+                Your call with <span id="clid"></span> was successful! Does the client need prescription?
+            </p>
+            <div class="row mb-0">
+                <div class="col-6">
+                    <a href="#" class="btn close-menu btn-full btn-m bg-red-dark font-600 rounded-s">No, close</a>
+                </div>
+                <div class="col-6">
+                    <a href="javascript:Prescribe();" class="btn btn-full btn-m bg-green-dark font-600 rounded-s">Yes! Proceed</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="menu-signout-errors" class="menu menu-box-bottom rounded-m"
+         data-menu-height="185"
+         data-menu-effect="menu-over">
+        <div class="menu-title">
+            <i class="fa fa-times-circle float-left mr-3 scale-box ml-3 fa-4x color-red-dark"></i>
+            <p class="color-highlight">The task has</p>
+            <h1>Failed</h1>
+            <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+        </div>
+        <div class="content mt-0 mb-0">
+            <p class="pr-3">
+                Could not sign you out. <a href="javascript: signgout();">please click here to try again</a>
+            </p>
+        </div>
+    </div>
+
+
+
+    <div id="menu-bank-details"
+         class="menu menu-box-bottom rounded-m bg-theme"
+         data-menu-height="470">
+        <div class="menu-title">
+            <p class="color-highlight">Cash Out </p>
+            <h1 class="font-800">Bank Details</h1>
+            <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+        </div>
+
+        <div class="content">
+            <div class="divider mt-n2"></div>
+
+            <div class="row mb-0">
+                <div class="col-12">
+                    <div class="input-style input-style-2">
+                        <span class="input-style-1-active">Bank Name</span>
+                        <em><i class="fa fa-angle-down"></i></em>
+                        <select class="form-control" id="bankname">
+                            <option value="" selected>Select Bank Name</option>
+                            <option value="Access Bank Plc">Access Bank Plc</option>
+                            <option value="Citibank Nigeria Limited">Citibank Nigeria Limited</option>
+                            <option value="Ecobank Nigeria Plc">Ecobank Nigeria Plc</option>
+                            <option value="Fidelity Bank Plc">Fidelity Bank Plc</option>
+                            <option value="First Bank Nigeria Limited">First Bank Nigeria Limited</option>
+                            <option value="First City Monument Bank Plc">First City Monument Bank Plc</option>
+                            <option value="Globus Bank Limited">Globus Bank Limited</option>
+                            <option value="Guaranty Trust Bank Plc">Guaranty Trust Bank Plc</option>
+                            <option value="Heritage Banking Company Ltd">Heritage Banking Company Ltd</option>
+                            <option value="Key Stone Bank">Key Stone Bank</option>
+                            <option value="	Polaris Bank">	Polaris Bank</option>
+                            <option value="Providus Bank">Providus Bank</option>
+                            <option value="Stanbic IBTC Bank Ltd">Stanbic IBTC Bank Ltd</option>
+                            <option value="Standard Chartered Bank Nigeria Ltd">Standard Chartered Bank Nigeria Ltd</option>
+                            <option value="Sterling Bank Plc">Sterling Bank Plc</option>
+                            <option value="SunTrust Bank Nigeria Limited">SunTrust Bank Nigeria Limited</option>
+                            <option value="Titan Trust Bank Ltd">Titan Trust Bank Ltd</option>
+                            <option value="Union Bank of Nigeria Plc">Union Bank of Nigeria Plc</option>
+                            <option value="United Bank For Africa Plc">United Bank For Africa Plc</option>
+                            <option value="Unity Bank Plc">Unity Bank Plc</option>
+                            <option value="Wema Bank Plc">Wema Bank Plc</option>
+                            <option value="Zenith Bank Plc">Zenith Bank Plc</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="row mb-0">
+                <div class="col-12">
+                    <div class="input-style input-style-2">
+                        <span class="input-style-1-active color-highlight">Bank Account Name</span>
+                        <input class="form-control" id="accountname" type="text" placeholder="Enter Bank Account Name">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="row mb-0">
+                <div class="col-12">
+                    <div class="input-style input-style-2">
+                        <span class="input-style-1-active color-highlight">Bank Account Number</span>
+                        <input class="form-control" id="accountnumber" type="text" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" maxlength="10" placeholder="Enter Bank Account Number">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="d-flex justify-content-center">
+                <div id="procreate" class="spinner-border color-green-dark hidden" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            <a href="javascript:CashOut();" id="cashout" class="btn btn-full gradient-blue font-13 btn-m font-600 mt-3 rounded-s">Cash Out</a>
+        </div>
+    </div>
+
+    <div id="menu-code-fail"
+         class="menu menu-box-modal rounded-m"
+         data-menu-height="300"
+         data-menu-width="350">
+        <h1 class="text-center mt-4"><i class="fa fa-3x fa-check-circle color-red-dark"></i></h1>
+        <h1 class="text-center text-uppercase font-900">Error!</h1>
+        <p class="boxed-text-l mt-2 mb-3 pb-3">
+            Something went wrong.<br> You can try agian.
+        </p>
+        <a href="#" data-menu="menu-bank-details" class="btn btn-m btn-center-m button-s shadow-l rounded-s font-600 bg-red-light">Try Again</a>
+    </div>
+
+    <div id="menu-pending-pay"
+         class="menu menu-box-modal rounded-m"
+         data-menu-height="300"
+         data-menu-width="350">
+        <h1 class="text-center mt-4"><i class="fa fa-3x fa-check-circle color-red-dark"></i></h1>
+        <h1 class="text-center text-uppercase font-900">Pending!</h1>
+        <p class="boxed-text-l mt-2 mb-3 pb-3">
+            Seems like you have a pending payment request.<br> If not, you can try agian.
+        </p>
+        <a href="#" data-menu="menu-bank-details" class="btn btn-m btn-center-m button-s shadow-l rounded-s font-600 bg-red-light">Try Again</a>
+    </div>
+
+    <div id="menu-code-okay"
+         class="menu menu-box-modal rounded-m"
+         data-menu-height="300"
+         data-menu-width="350">
+        <h1 class="text-center mt-4"><i class="fa fa-3x fa-check-circle color-green-dark"></i></h1>
+        <h1 class="text-center text-uppercase font-900">Success</h1>
+        <p class="boxed-text-l mt-2 mb-3 pb-3">
+            Your payment request has been formally logged.
+        </p>
+        <a href="#" class="close-menu btn btn-m btn-center-m button-s shadow-l rounded-s font-600 bg-green-light">Close</a>
+    </div>
+
+    <div id="ad-timed-2" class="menu menu-box-modal menu-box-detached" data-menu-width="101vw" data-menu-height="101vh" data-menu-effect="menu-over">
+        <div class="card bg-17 mb-0" data-card-height="101vh">
+            <div class="card-top">
+                <a href="#" class="close-menu ad-time-close color-highlight"><i class="fa fa-times disabled"></i><span></span></a>
+            </div>
+            <div class="timeline-cover timeline-cover-center">
+                <div data-card-height="330" class="card preload-img" data-src="/images/pictures/6.jpg">
+                    <div class="card-bottom mb-4 text-center">
+                        <h1 class="color-white font-40 mb-0">Jane Black</h1>
+                        <p class="color-white opacity-90 mb-0">
+                            Verified patient with Spot-On Health
+                        </p>
+                    </div>
+                    <div class="card-overlay bg-gradient opacity-80"></div>
+                </div>
+            </div>
+            
+            <h1 class="color-white text-center mb-3 font-40">Medical History</h1>
+
+            <div class="timeline-body timeline-body-center"> 
+                <div class="timeline-deco"></div>
+
+                <div class='timeline-item' id="no_prescription">
+                    <div class='timeline-item-content rounded-sm shadow-l'>
+                        <h5 class='font-500 text-center'>
+                            No Medical History Available
+                        </h5>
+                    </div>
+                </div>
+
+                <div id="docItems">
+                </div>
+
+            </div>
+
+            <div class="card-overlay bg-black opacity-20"></div>
+        </div>
+    </div>
+    <div id="menu-network-1"
+         class="menu menu-box-modal rounded-m"
+         data-menu-height="300"
+         data-menu-width="350">
+        <h1 class="text-center mt-4"><i class="fa fa-3x fa-check-circle color-red-dark"></i></h1>
+        <h1 class="text-center text-uppercase font-900">Error!</h1>
+        <p class="boxed-text-l mt-2 mb-3 pb-3">
+            Something went wrong.<br> Try loading medical history again.
+        </p>
+        <a href="javascript:lunchHistory();" class="btn btn-m btn-center-m button-s shadow-l rounded-s font-600 bg-red-light">Try Again</a>
+    </div>
+
+    <input type="hidden" id="client_id" />
+
+    <script type="text/javascript" src="/scripts/jquery.js"></script>
+    <script type="text/javascript" src="/scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/scripts/custom.js"></script>
+    <script type="text/javascript" src="/js/site.js"></script>
+    <script type="text/javascript">
+
+        var _query = location.search.split('=');
+        console.log(location.search);
+        console.log(_query[1]);
+          
+        LoadPhoto(_query[1]);
+        function LoadPhoto(username) {
+
+            LoadDashboard(username);
+        }
+        
+
+        var myCaller = false;
+        //onCall('client:jason');
+        function onCall(client) {
+
+            var _client_ = client.split(':')[1];
+             
+            document.getElementById("client_id").value = _client_;
+            setInterval(function () { myFunction(); }, 1800);
+        } 
+        function myFunction() {
+
+            if (myCaller == false) {
+                myCaller = true;
+                $("#medHistory").removeClass('hidden');
+                lunchHistory();
+            }
+        }
+
+        //CallJav('client:jason,docid');
+        function CallJav(clientid) { 
+            location.href = "/doctorboard/question?client=" + clientid;
+        }
+
+        function signgout() {
+            logout();
+        }
+
+        function Prescribe() {
+            var clientele = localStorage.getItem("clientid");
+            location.href = "/doctorboard/history?client=" + clientele;
+        } 
+    </script>
+</body>
+</html>

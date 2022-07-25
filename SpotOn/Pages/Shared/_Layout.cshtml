@@ -1,0 +1,205 @@
+﻿<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <title>Spot-On Mobile</title>
+    <link rel="stylesheet" type="text/css" href="~/styles/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="~/styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/fonts/css/fontawesome-all.min.css">
+    <link rel="manifest" href="~/_manifest.json" data-pwa-version="set_in_manifest_and_pwa_js">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/app/icons/icon-192x192.png">
+    <script type="text/javascript" src="~/scripts/jquery.js"></script>
+    @*<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">*@
+</head>
+
+<body class="theme-dark">
+
+    <div id="preloader"><div class="spinner-border color-highlight" role="status"></div></div>
+
+    <div id="page">
+
+        @*<div class="header header-auto-show header-fixed header-logo-center">
+                <a href="index.html" class="header-title">Spot-On</a>
+                <a href="#" data-menu="menu-main" class="header-icon header-icon-1"><i class="fas fa-bars"></i></a>
+                <a href="#" data-toggle-theme class="header-icon header-icon-4 show-on-theme-dark"><i class="fas fa-sun"></i></a>
+                <a href="#" data-toggle-theme class="header-icon header-icon-4 show-on-theme-light"><i class="fas fa-moon"></i></a>
+                <a href="#" data-menu="menu-share" class="header-icon header-icon-3"><i class="fas fa-share-alt"></i></a>
+            </div>*@
+
+        <div class="header header-fixed header-logo-center header-auto-show">
+            <a href="/" class="header-title">SpotOn @ViewData["Title"]</a>
+            <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+            @*<a href="#" data-menu="menu-main" class="header-icon header-icon-4"><i class="fas fa-bars"></i></a>*@
+
+            <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-dark"><i class="fas fa-sun"></i></a>
+            <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-light"><i class="fas fa-moon"></i></a>
+        </div>
+
+        @*<div id="footer-bar" class="footer-bar-6">
+            <a id="foot-1"><i class="fa fa-box"></i><span>Artisan</span></a>
+            <a id="foot-2"><i class="fa fa-utensils"></i><span>Chef</span></a>
+            <a id="foot-3" class="circle-nav active-nav"><i class="fa fa-stethoscope"></i><span>Health</span></a>
+            <a id="foot-4"><i class="fa fa-shopping-cart"></i><span>Products</span></a>
+            <a id="foot-5"><i class="fa fa-chalkboard-teacher"></i><span>Tutors</span></a>
+            
+        </div>*@
+
+        <div class="page-title page-title-fixed">
+            <h1>SpotOn @ViewData["Title"]</h1>
+            <a href="/login" id="falogged" class="page-title-icon shadow-xl bg-theme color-theme hidden"><i class="fa fa-user-shield"><br />login</i></a>
+            <a href="javascript: LogMeOut();" id="faloggedout" class="page-title-icon shadow-xl bg-theme color-theme hidden"><i class="fa fa-user-ninja"><br />logout</i></a>
+            @*<a href="#" class="page-title-icon shadow-xl bg-theme color-theme" data-menu="menu-share"><i class="fa fa-share-alt"></i></a>*@
+            <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-light" data-toggle-theme><i class="fa fa-moon"></i></a>
+            <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-dark" data-toggle-theme><i class="fa fa-lightbulb color-yellow-dark"></i></a>
+            @*<a href="#" class="page-title-icon shadow-xl bg-theme color-theme" data-menu="menu-main"><i class="fa fa-bars"></i></a>*@
+        </div>
+        <div class="page-title-clear"></div>
+
+        @RenderBody()
+
+        <!-- Main Menu-->
+        <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-load="/menu-main.html" data-menu-width="280" data-menu-active="nav-welcome"></div>
+
+        <!-- Share Menu-->
+        <div id="menu-share" class="menu menu-box-bottom rounded-m" data-menu-load="/menu-share.html" data-menu-height="370"></div>
+
+        <!-- Colors Menu-->
+        <div id="menu-colors" class="menu menu-box-bottom rounded-m" data-menu-load="/menu-colors.html" data-menu-height="480"></div>
+
+    </div>
+
+    <div id="menu-signout-error" class="menu menu-box-bottom rounded-m"
+         data-menu-height="185"
+         data-menu-effect="menu-over">
+        <div class="menu-title">
+            <i class="fa fa-times-circle float-left mr-3 scale-box ml-3 fa-4x color-red-dark"></i>
+            <p class="color-highlight">The task has</p>
+            <h1>Failed</h1>
+            <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+        </div>
+        <div class="content mt-0 mb-0">
+            <p class="pr-3">
+                Could not sign you out. <a href="javascript: LogMeOut();">please click here to try again</a>
+            </p>
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="~/scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/scripts/custom.js"></script>
+    <script type="text/javascript">
+        var url = 'http://medicall-002-site5.ctempurl.com/api/UserSpotOns';
+        function LogMeOut() {
+            $("#menu-signout-error").hideMenu();
+            signout();
+        }
+        var signout = async () => {
+            try {
+                var requestOptions = {
+                    method: 'PUT',
+                    redirect: 'follow'
+                };
+                var id = localStorage.getItem("logoutid");
+                const res = await fetch(url + "/logout?id=" + id, requestOptions);
+                if (!res) {
+                    console.log('Network response was not ok'); 
+                    $("#menu-signout-error").showMenu();
+                } else {
+                    const data = await res.json();
+                    processResult(data);
+                }
+            } catch (error) {
+                $("#menu-signout-error").showMenu();
+            }
+        }
+
+        function processResult(result) {
+
+            if (result) {
+                localStorage.clear();
+                location.href = "/index";
+            }
+        }
+
+        $(document).ready(function () {
+            'use strict'
+
+            if (localStorage.getItem('username') != null) {
+                $("#faloggedout").removeClass('hidden');
+                $("#falogged").addClass('hidden');
+            } else {
+                $("#faloggedout").addClass('hidden');
+                $("#falogged").removeClass('hidden');
+            }
+
+
+            var footer_ = localStorage.getItem('_footer_');
+
+            if (footer_ == 'foot 1') {
+                $('#foot-2').removeClass('circle-nav active-nav');
+                $('#foot-3').removeClass('circle-nav active-nav');
+                $('#foot-4').removeClass('circle-nav active-nav');
+                $('#foot-5').removeClass('circle-nav active-nav');
+                $('#foot-1').addClass('circle-nav active-nav');
+            } else if (footer_ == 'foot 2') {
+                $('#foot-1').removeClass('circle-nav active-nav');
+                $('#foot-3').removeClass('circle-nav active-nav');
+                $('#foot-4').removeClass('circle-nav active-nav');
+                $('#foot-5').removeClass('circle-nav active-nav');
+                $('#foot-2').addClass('circle-nav active-nav');
+            } else if (footer_ == 'foot 3') {
+                $('#foot-2').removeClass('circle-nav active-nav');
+                $('#foot-1').removeClass('circle-nav active-nav');
+                $('#foot-4').removeClass('circle-nav active-nav');
+                $('#foot-5').removeClass('circle-nav active-nav');
+                $('#foot-3').addClass('circle-nav active-nav');
+            } else if (footer_ == 'foot 4') {
+                $('#foot-1').removeClass('circle-nav active-nav');
+                $('#foot-2').removeClass('circle-nav active-nav');
+                $('#foot-3').removeClass('circle-nav active-nav');
+                $('#foot-5').removeClass('circle-nav active-nav');
+                $('#foot-4').addClass('circle-nav active-nav');
+            } else if (footer_ == 'foot 5') {
+                $('#foot-1').removeClass('circle-nav active-nav');
+                $('#foot-2').removeClass('circle-nav active-nav');
+                $('#foot-3').removeClass('circle-nav active-nav');
+                $('#foot-4').removeClass('circle-nav active-nav');
+                $('#foot-5').addClass('circle-nav active-nav');
+            }
+
+            $('#foot-1').on('click', function (e) {
+                e.preventDefault();
+                localStorage.setItem('_footer_', 'foot 1');
+                location.href = "/construction";
+            })
+            $('#foot-2').on('click', function (e) {
+                e.preventDefault();
+                localStorage.setItem('_footer_', 'foot 2');
+                location.href = "/construction";
+            })
+            $('#foot-3').on('click', function (e) {
+                e.preventDefault();
+                localStorage.setItem('_footer_', 'foot 3');
+                location.href = "/health";
+            })
+            $('#foot-4').on('click', function (e) {
+                e.preventDefault();
+                localStorage.setItem('_footer_', 'foot 4');
+                location.href = "/construction";
+            })
+            $('#foot-5').on('click', function (e) {
+                e.preventDefault();
+                localStorage.setItem('_footer_', 'foot 5');
+                location.href = "/tutors";
+            })
+
+
+        });
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+﻿@page
+@model SpotOn.Pages.Chat.CommunicationModel
+@{
+}
+
+<div id="footer-bar" class="d-flex">
+
+    <div class="mr-2 flex-fill speach-input">
+        <input type="text" id="txtChat" class="form-control" placeholder="Enter your Message here">
+    </div>
+    <div class="ml-1 speach-icon" id="aSendChat">
+        <a href="javascript: sendChat();" class="gradient-highlight color-white mr-2 "><i class="fa fa-arrow-up"></i></a>
+    </div>
+    <div id="chat_progress" style="float:right" class="spinner-border mr-2 mt-3 color-green-dark speach-icon hidden" role="status">
+
+    </div>
+</div>
+
+
+<div class="page-title-clear"></div>
+
+<div class="page-content">
+
+    <div class="content mt-0 mb-n5" id="com_chat">
+        <div class='speech-bubble speech-right color-black'>
+            Parent's chat appears here
+        </div>
+        <div class='clearfix'></div>
+        <div class='speech-bubble speech-left bg-highlight'>
+            Your chat appears here
+        </div>
+        <div class='clearfix'></div>
+    </div>
+
+
+</div>
+
+<div id="menu_warning" class="menu menu-box-bottom rounded-m"
+     data-menu-height="185"
+     data-menu-effect="menu-over">
+    <div class="menu-title">
+        <i class="fa fa-times-circle float-left mr-3 scale-box ml-3 fa-4x color-red-dark"></i>
+        <p class="color-highlight" id="warning_title">The task has</p>
+        <h1>Failed</h1>
+        <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+    </div>
+    <div class="content mt-0 mb-0">
+        <p class="pr-3" id="warning_text">
+            This task has failed. This message can now be dismissed manually or programatically.
+        </p>
+    </div>
+</div>
+
+
+<div id="menu_option_no_parent" class="menu menu-box-bottom rounded-m"
+     data-menu-height="330"
+     data-menu-effect="menu-over">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-info-circle scale-box color-blue-dark shadow-xl rounded-circle"></i></h1>
+    <h3 class="text-center mt-3 font-700">Chat Message</h3>
+    <p class="boxed-text-xl opacity-70">
+        You have not selected a parent to chat with. <br />Please <a href="/chat">click here</a> to select a parent
+    </p>
+    <div class="row mb-0 mr-3 ml-3">
+
+        <div class="col-12">
+            <a href="/chat" class="btn btn-full btn-m color-green-dark border-green-dark font-600 rounded-s">continue to dashboard!</a>
+        </div>
+    </div>
+</div>
+
+
+<div id="menu_option_no_network" class="menu menu-box-bottom rounded-m"
+     data-menu-height="330"
+     data-menu-effect="menu-over">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-info-circle scale-box color-blue-dark shadow-xl rounded-circle"></i></h1>
+    <h3 class="text-center mt-3 font-700">Network Error!</h3>
+    <p class="boxed-text-xl opacity-70">
+        There was an error connecting to the server! <br />Please try sending chat again.
+    </p>
+    <div class="row mb-0 mr-3 ml-3">
+
+        <div class="col-12">
+            <a href="#" class="btn close-menu btn-full btn-m color-green-dark border-green-dark font-600 rounded-s">Close</a>
+        </div>
+    </div>
+</div>
+
+<div id="menu_option_no_network_1" class="menu menu-box-bottom rounded-m"
+     data-menu-height="330"
+     data-menu-effect="menu-over">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-info-circle scale-box color-blue-dark shadow-xl rounded-circle"></i></h1>
+    <h3 class="text-center mt-3 font-700">Network Error!</h3>
+    <p class="boxed-text-xl opacity-70">
+        There was an error connecting to the server! <br />Please try sending chat again.
+    </p>
+    <div class="row mb-0 mr-3 ml-3">
+
+        <div class="col-12">
+            <a href="javascript: location.reload();" class="btn btn-full btn-m color-green-dark border-green-dark font-600 rounded-s">Reload</a>
+        </div>
+    </div>
+</div>
+
+
+<div id="menu_option_no_network_2" class="menu menu-box-bottom rounded-m"
+     data-menu-height="330"
+     data-menu-effect="menu-over">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-info-circle scale-box color-blue-dark shadow-xl rounded-circle"></i></h1>
+    <h3 class="text-center mt-3 font-700">Network Error!</h3>
+    <p class="boxed-text-xl opacity-70">
+        There was an error connecting to the server! <br />Chat not initiated.
+    </p>
+    <div class="row mb-0 mr-3 ml-3">
+
+        <div class="col-12">
+            <a href="javascript: location.reload();" class="btn btn-full btn-m color-green-dark border-green-dark font-600 rounded-s">Re=Initiate Chat</a>
+        </div>
+    </div>
+</div>
+
+<div id="menu_option_server_error" class="menu menu-box-bottom rounded-m"
+     data-menu-height="330"
+     data-menu-effect="menu-over">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-info-circle scale-box color-blue-dark shadow-xl rounded-circle"></i></h1>
+    <h3 class="text-center mt-3 font-700">Server Error!</h3>
+    <p class="boxed-text-xl opacity-70">
+        Message sending failed to complete! <br />Please try sending chat again.
+    </p>
+    <div class="row mb-0 mr-3 ml-3">
+
+        <div class="col-12">
+            <a href="#" class="btn close-menu btn-full btn-m color-green-dark border-green-dark font-600 rounded-s">Close</a>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="ChatCommHidn" />
+<script type="text/javascript" src="~/js/tutorScript.js"></script>

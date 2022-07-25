@@ -1,0 +1,129 @@
+﻿@page
+@model MeetSpotOn.Pages.AboutRegistrationModel
+@{
+}
+<div class="page-content">
+
+    <div class="card card-style bg-12" data-card-height="200">
+        <div class="card-top">
+           
+        </div>
+        <div class="card-bottom ml-3">
+            <h1 class="color-white mb-n2">Catered for You</h1>
+            <p class="color-white opacity-50 mb-3">
+                Subscriptions to suit all your needs.
+            </p>
+        </div>
+        <div class="card-overlay bg-gradient"></div>
+    </div>
+
+    <div class="tab-controls mr-3 ml-3 tabs-round tab-animated tabs-large tabs-rounded clearfix shadow-xl mb-4"
+         data-tab-items="2"
+         data-tab-active="bg-highlight activated color-white">
+        <a href="#" data-tab-active data-tab="tab-1">Patient</a>
+        <a href="#" data-tab="tab-2">Doctor</a>
+    </div>
+
+    <div class="tab-content" id="tab-1">
+        <div class="card card-style">
+            <div class="content">
+                <p class="color-highlight mb-n1 font-600">Patient</p>
+                <h1>Terms and Policy</h1>
+                <p>Are you seeking to get information from qualified doctors as a patient.</p>
+
+
+                <h5 class="mt-3"><i class="fa fa-check color-green-dark pr-2"></i> Access Qualified Doctors</h5>
+                <h5 class="mt-3"><i class="fa fa-check color-green-dark pr-2"></i> Get Thorough Medical Advice</h5>
+                <h5 class="mt-3"><i class="fa fa-check color-green-dark pr-2"></i> Speak to Doctors in your Language</h5>
+                <h5 class="mt-3"><i class="fa fa-check color-green-dark pr-2"></i> 24/7 Medical Access</h5>
+                <div class="divider"></div>
+
+                <p>
+                    <div class="form-check icon-check">
+                        <input class="form-check-input" type="checkbox" onchange="CheckChange()" value="" id="checkP">
+                        <label class="form-check-label color-white" for="checkP">Read Our Terms and Policy to Continue </label>
+                        <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
+                        <i class="icon-check-2 far fa-check-circle font-16 color-highlight"></i>
+                    </div>
+                </p>
+                <div class="divider"></div>
+                <a id="patient" href="javascript:SetRegistration('patient');" class="btn btn-full hidden btn-m rounded-sm font-13 font-600 gradient-highlight mb-4">Continue as Patient</a>
+
+            </div>
+        </div>
+    </div>
+    <div class="tab-content" id="tab-2">
+        <div class="card card-style">
+            <div class="content">
+                <p class="color-highlight mb-n1 font-600">Doctor</p>
+                <h1>Terms and Policy</h1>
+                <p>Are you seeking to offer professional medical services? To do this, you must be a doctor (Spot-On Health is careful about who we register as doctors and will ALWAYS verify details submitted by doctors before approving them on our platform.</p>
+                <h5 class="mt-3"><i class="fa fa-check color-green-dark pr-2"></i> Provide Quality Medical Advice</h5> 
+                <h5 class="mt-3"><i class="fa fa-check color-green-dark pr-2"></i> Speak a Local Language</h5>
+                <h5 class="mt-3"><i class="fa fa-check color-green-dark pr-2"></i> 24/7 Medical Service</h5>
+                <div class="divider"></div>
+
+                <p>
+                    <div class="form-check icon-check">
+                        <input class="form-check-input" type="checkbox" value="" onchange="DocChange()" id="checkD">
+                        <label class="form-check-label color-white" for="checkD" >Read Our Terms and Policy to Continue </label>
+                        <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
+                        <i class="icon-check-2 far fa-check-circle font-16 color-highlight"></i>
+                    </div>
+                </p>
+                <div class="divider"></div>
+                <a id="doctor" href="javascript:SetRegistration('doctor');" class="btn btn-full hidden btn-m rounded-sm font-13 font-600 gradient-highlight mb-4">Continue as Doctor</a>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div data-menu-load="menu-footer.html"></div>
+</div>
+<!-- Page content ends here-->
+<!-- Menu Trial-->
+<div id="menu-trial"
+     class="menu menu-box-modal rounded-m"
+     data-menu-height="101%"
+     data-menu-width="101%">
+    <a href="#" class="close-menu icon icon-xs rounded-xl bg-red-dark mt-3 float-right mr-3"><i class="fa fa-times"></i></a>
+    <div class="content">
+
+        <h2 class="bolder bottom-15">Privacy Policy</h2>
+        <p>Your privacy is very important to us. Accordingly, we have developed this Policy in order for you to understand how we collect, use, communicate and disclose and make use of personal information. The following outlines our privacy policy.</p>
+        <ul>
+            <li>Before or at the time of collecting personal information, we will identify the purposes for which information is being collected.</li>
+            <li>We will collect and use of personal information solely with the objective of fulfilling those purposes specified by us and for other compatible purposes, unless we obtain the consent of the individual concerned or as required by law.		</li>
+            <li>We will only retain personal information as long as necessary for the fulfillment of those purposes. </li>
+            <li>We will collect personal information by lawful and fair means and, where appropriate, with the knowledge or consent of the individual concerned. </li>
+            <li>Personal data should be relevant to the purposes for which it is to be used, and, to the extent necessary for those purposes, should be accurate, complete, and up-to-date. </li>
+            <li>We will protect personal information by reasonable security safeguards against loss or theft, as well as unauthorized access, disclosure, copying, use or modification.</li>
+            <li>We will make readily available to customers information about our policies and practices relating to the management of personal information. </li>
+        </ul>
+        <p>We are committed to conducting our business in accordance with these principles in order to ensure that the confidentiality of personal information is protected and maintained. </p>
+         <p></p>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function SetRegistration(option) {
+        localStorage.setItem("designation", option);
+        location.href = '/signup';
+    }
+
+    function CheckChange() {
+        $("#checkP").prop("checked", true); 
+        $("#menu-trial").showMenu();
+        $("#patient").removeClass('hidden');
+    }
+
+    function DocChange() {
+        $("#checkD").prop("checked", true);
+        $("#menu-trial").showMenu();
+        $("#doctor").removeClass('hidden')
+    }
+</script>

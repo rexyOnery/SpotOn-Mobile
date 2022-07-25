@@ -1,0 +1,52 @@
+﻿@page
+@model SpotOn.Pages.Chat.IndexModel
+@{
+}
+
+<div class="page-content">
+
+    <div class="card card-style">
+        <div class="content mb-0" id="chat_heads">
+
+        </div>
+    </div>
+    <div id="pro_ads" style="float:right" class="spinner-border mr-4 color-green-dark hidden" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<div id="menu_option_no_chat" class="menu menu-box-bottom rounded-m"
+     data-menu-height="330"
+     data-menu-effect="menu-over">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-info-circle scale-box color-blue-dark shadow-xl rounded-circle"></i></h1>
+    <h3 class="text-center mt-3 font-700">Empty Chat List</h3>
+    <p class="boxed-text-xl opacity-70">
+        You have no chat list.<br> You can create one by chatting up a parent.
+    </p>
+    <div class="row mb-0 mr-3 ml-3">
+
+        <div class="col-12">
+            <a href="javascript: history.back(-1);" class="btn btn-full btn-m color-green-dark border-green-dark font-600 rounded-s">continue to dashboard!</a>
+        </div>
+    </div>
+</div>
+
+
+<div id="menu_option_no_network" class="menu menu-box-bottom rounded-m"
+     data-menu-height="330"
+     data-menu-effect="menu-over">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-info-circle scale-box color-blue-dark shadow-xl rounded-circle"></i></h1>
+    <h3 class="text-center mt-3 font-700">Network Error!</h3>
+    <p class="boxed-text-xl opacity-70">
+        There was an error connecting to the server! <br /><a href='javascript: location.reload();'>Click here to Reload</a>. 
+    </p>
+    <div class="row mb-0 mr-3 ml-3">
+
+        <div class="col-12">
+            <a href="/tutors/tutordash" class="btn btn-full btn-m color-green-dark border-green-dark font-600 rounded-s">continue to dashboard!</a>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="ChatHeadHidn" />
+<script type="text/javascript" src="~/js/tutorScript.js"></script>

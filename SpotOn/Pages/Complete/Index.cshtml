@@ -1,0 +1,117 @@
+﻿@page
+@model MeetSpotOn.Pages.Complete.IndexModel
+@{
+}
+
+<div class="page-content">
+
+
+    <div class="card card-style">
+        <div class="content">
+            <p class="mb-n1 color-highlight font-600">Work Related</p>
+            <h1>Core Section</h1>
+            <p>
+                This section helps users find you easily based on your specialization and numbers of languages you can speak to communicate with patients effectively.
+            </p>
+        </div>
+    </div>
+
+    <div class="card card-style">
+        <div class="content mb-2">
+            <h5>Your Specialization.</h5>
+            <p class="font-10 mt-n1 mb-0 pb-2">
+                @*This information is not stored. This is just a dummy page.*@
+            </p>
+            <div class="input-style input-style-2 input-required mt-2">
+                <span>What's your area of specialization?</span>
+                <em><i class="fa fa-angle-down"></i></em>
+                <select class="form-control" id="specialization">
+                    <option value="default" disabled selected>Select your specialization</option>
+
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="card card-style">
+        <div class="content">
+            <h5>List the numbers of languages you can effectively communicate in with patients</h5>
+            <div class="input-style input-style-2 input-required">
+                <span>Enter the Languages</span>
+                <em>(required)</em>
+                <textarea id="languages" class="form-control" placeholder=""></textarea>
+            </div>
+            <a href="javascript:addSpecialItem();" id="btnSave" class="btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s">Save</a>
+            <div class="d-flex justify-content-center">
+                <div id="processing" class="spinner-border color-green-dark hidden" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div data-menu-load="menu-footer.html"></div>
+</div>
+<!-- Page content ends here-->
+
+<div id="menuwarning-specialization"
+     class="menu menu-box-modal rounded-m"
+     data-menu-height="140"
+     data-menu-width="350">
+    <div class="menu-title">
+        <i class="fa fa-times-circle float-left mr-3 scale-box ml-3 fa-4x color-red-dark"></i>
+        <p class="color-highlight">The task has</p>
+        <h1>Failed</h1>
+        @*<a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>*@
+    </div>
+    <div class="content mb-0 mt-0">
+        <p class="pr-3">
+            Unable to load specialization items. <a href="javascript:reloadSpecial();">Click here to reload items</a>
+        </p>
+    </div>
+</div>
+
+<div id="toast-1" class="toast toast-tiny toast-top bg-blue-dark"><i class="fa fa-sync fa-spin mr-3"></i>Processing...</div>
+
+<div id="snackbar-5x" class="snackbar-toast color-white bg-red-dark" data-delay="5000" data-autohide="true"><i class="fa fa-times mr-3"></i>Error Occured</div>
+<div id="snackbar-5"
+     class="menu menu-box-modal rounded-m"
+     data-menu-height="140"
+     data-menu-width="350">
+    <div class="menu-title">
+        <i class="fa fa-times-circle float-left mr-3 scale-box ml-3 fa-4x color-red-dark"></i>
+        <p class="color-highlight">The task has</p>
+        <h1>Failed</h1>
+        <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+    </div>
+    <div class="content mb-0 mt-0">
+        <p class="pr-3">
+            An Error Occured. <a href="">Please click here to continue.</a>
+        </p>
+    </div>
+</div>
+<div id="menu-snackbar-5"
+     class="menu menu-box-modal rounded-m"
+     data-menu-height="140"
+     data-menu-width="350">
+    <div class="menu-title">
+        <i class="fa fa-times-circle float-left mr-3 scale-box ml-3 fa-4x color-red-dark"></i>
+        <p class="color-highlight">The task has</p>
+        <h1>Failed</h1>
+        <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+    </div>
+    <div class="content mb-0 mt-0">
+        <p class="pr-3">
+            Seems this user has already registered a specialization. <a href="/complete/photo">Please click here to continue.</a>
+        </p>
+    </div>
+</div>
+<div id="snackbar-3" class="snackbar-toast color-white bg-yellow-dark" data-delay="5000" data-autohide="true"><i class="fa fa-info mr-3"></i>Something's wrong! All fields are required.</div>
+<script type="text/javascript" src="/js/site.js"></script>
+<script type="text/javascript">
+    getMedicalSpecialItems();
+
+    function reloadSpecial() {
+        $("#menuwarning-specialization").hideMenu();
+        getMedicalSpecialItems();
+    }
+</script>

@@ -1,0 +1,369 @@
+﻿@page
+@model MeetSpotOn.Pages.Payment.subscriptionsModel
+@{
+}
+
+@*<script src="https://js.paystack.co/v2/inline.js"></script>*@
+<script type="text/javascript" src="https://sdk.monnify.com/plugin/monnify.js"></script>
+<div class="page-content">
+    <input type="hidden" id="firstname" />
+    <input type="hidden" id="lastname" />
+    <input type="hidden" id="email" />
+    <input type="hidden" id="tutorprice" />
+    <input type="hidden" id="healthprice" />
+    <input type="hidden" id="artisanprice" />
+    <input type="hidden" id="productprice" />
+    <input type="hidden" id="chefprice" />
+
+    <div class="card card-style bg-16" data-card-height="200">
+        <div class="card-top">
+            <a href="#" class="bg-white color-black btn-s font-600 rounded-sm scale-box float-right mr-2 mt-2">Choose Plan!</a>
+        </div>
+        <div class="card-bottom ml-3">
+            <h1 class="color-white mb-n2">Subscription Plans</h1>
+            <p class="color-white opacity-50 mb-3">
+                With Gorgeous Pricing.
+            </p>
+        </div>
+        <div class="card-overlay bg-gradient"></div>
+    </div>
+    <div class="row mb-5" id="item-preloader">
+        <div class="col-12">
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border color-blue-dark" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="tutor" class="hidden">
+        <a href="#" class="card card-style check-card mb-2 bg-highlight">
+            <div class="content">
+                <div class="d-flex">
+                    <div class="ml-1">
+                        <div class="form-check icon-check mt-2">
+                            <input class="form-check-input" type="checkbox" value="" id="check1">
+                            <i class="icon-check-1 fa fa-circle color-gray-dark font-20"></i>
+                            <i class="icon-check-2 fa fa-check-circle font-20 color-white"></i>
+                        </div>
+                    </div>
+                    <div class="ml-5">
+                        <h4 class="mb-n1 color-white">Yearly Flat Value</h4>
+                        <p class="color-white font-11">Yearly Payment</p>
+                    </div>
+                    <div class="ml-auto">
+                        <h3 class="mb-n1 color-white">&#8358;5,000<sup class="opacity-30">.00</sup></h3>
+                        <p class="color-white opacity-50 font-11 text-right">&#8358;416.66/month</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <p class="text-center color-highlight font-10"></p>
+
+        <a href="javascript:payWithMonnify(5000);" class="btn btn-margins btn-full gradient-highlight font-13 btn-m font-600 rounded-s scale-box">Choose Plan</a>
+    </div>
+    <div id="parent" class="hidden">
+        <div class="boxed-slider owl-carousel owl-dots-under mb-3">
+
+            @*<div class="card mx-0 card-style mb-3">
+                    <div class="content">
+                        <h1 class="text-center"><i class="fa fa-stethoscope fa-4x color-blue-dark"></i></h1>
+                        <h1 class="text-center pt-4 font-30 mb-n1">Health Pack</h1>
+                        <p class="text-center color-highlight font-600">A simple Health Check for Everyone</p>
+                        <h1 class="font-40 text-center">
+                            <sup class="price-sup font-14">&#8358;</sup>
+                            <span id="healthpacks">500</span>
+                            <sup class="price-sup font-14">.00</sup>
+                        </h1>
+                        <div class="divider mt-4"></div>
+                        <ul class="icon-list pl-3 font-600">
+                            <li><i class="fa fa-check color-blue-dark"></i> Up to 1 Month User Access</li>
+                            <li><i class="fa fa-check color-blue-dark"></i> Unlocks All Medical Doctors</li>
+                            <li><i class="fa fa-check color-blue-dark"></i> Access To Doctor Prescriptions</li>
+                        </ul>
+                        <div class="divider mt-4"></div>
+
+                        <a href="javascript:payHealthWithPaystack();" class="btn btn-m gradient-blue rounded-sm btn-center-m font-600"><i class="fa fa-check pr-3"></i>Select Pack </a>
+
+                    </div>
+                </div>
+                <div class="card mx-0 card-style mb-3">
+                    <div class="content">
+                        <h1 class="text-center"><i class="fa fa-box fa-4x color-red-dark"></i></h1>
+                        <h1 class="text-center pt-4 font-30 mb-n1">Artisan Pack</h1>
+                        <p class="text-center color-highlight font-600">Mechanics, Barbers, Carpenters...</p>
+                        <h1 class="font-40 text-center">
+                            <sup class="price-sup font-14">&#8358;</sup>
+                            <span id="artisanpacks">500</span>
+                            <sup class="price-sup font-14">.00</sup>
+                        </h1>
+                        <div class="divider mt-4"></div>
+                        <ul class="icon-list pl-3 font-600">
+                            <li><i class="fa fa-check color-red-dark"></i> 1 Month User Access</li>
+                            <li><i class="fa fa-check color-red-dark"></i> Up to Infinite Transactions</li>
+                            <li><i class="fa fa-check color-red-dark"></i> Mechanics, Barbers, Carpenters...</li>
+                        </ul>
+                        <div class="divider mt-4"></div>
+
+                        <a href="#javascript:payArtisanWithPaystack();" class="btn btn-m gradient-red rounded-sm btn-center-l font-600">Select Pack</a>
+
+                    </div>
+                </div>
+                <div class="card mx-0 card-style mb-3">
+                    <div class="content">
+                        <h1 class="text-center"><i class="fa fa-utensils fa-4x color-yellow-dark"></i></h1>
+                        <h1 class="text-center pt-4 font-30 mb-n1">Chef Pack</h1>
+                        <p class="text-center color-highlight font-600">Awesome for Cook Access</p>
+                        <h1 class="font-40 text-center">
+                            <sup class="price-sup font-14">&#8358;</sup>
+                            <span id="chefpacks">500</span>
+                            <sup class="price-sup font-14">.00</sup>
+                        </h1>
+                        <div class="divider mt-4"></div>
+                        <ul class="icon-list pl-3 font-600">
+                            <li><i class="fa fa-check color-yellow-dark"></i> 1 Month User Access</li>
+                            <li><i class="fa fa-check color-yellow-dark"></i> Infinite Cook Access</li>
+                            <li><i class="fa fa-check color-yellow-dark"></i> All Seasoned Cooks</li>
+                        </ul>
+                        <div class="divider mt-4"></div>
+
+                        <a href="#javascript:payChefWithPaystack();" class="btn btn-m gradient-yellow rounded-sm btn-center-m font-600">Select Pack</a>
+
+                    </div>
+                </div>
+                <div class="card mx-0 card-style mb-3">
+                    <div class="content">
+                        <h1 class="text-center"><i class="fa fa-shopping-cart fa-4x color-green-dark"></i></h1>
+                        <h1 class="text-center pt-4 font-30 mb-n1">Product Pack</h1>
+                        <p class="text-center color-highlight font-600">Access To Consumer Products</p>
+                        <h1 class="font-40 text-center">
+                            <sup class="price-sup font-14">&#8358;</sup>
+                            <span id="productpacks">500</span>
+                            <sup class="price-sup font-14">.00</sup>
+                        </h1>
+                        <div class="divider mt-4"></div>
+                        <ul class="icon-list pl-3 font-600">
+                            <li><i class="fa fa-check color-green-dark"></i> 1 Month User Access</li>
+                            <li><i class="fa fa-check color-green-dark"></i> Infinite Product Access</li>
+                            <li><i class="fa fa-check color-green-dark"></i> Awesome Bargaining System</li>
+                        </ul>
+                        <div class="divider mt-4"></div>
+
+                        <a href="#javascript:payProductWithPaystack();" class="btn btn-m gradient-green rounded-sm btn-center-m font-600">Select Pack </a>
+
+                    </div>
+                </div>*@
+
+            <div class="card mx-0 card-style mb-3">
+                <div class="content">
+                    <h1 class="text-center"><i class="fa fa-chalkboard-teacher fa-4x color-yellow-dark"></i></h1>
+                    <h1 class="text-center pt-4 font-30 mb-n1">Basic Pack</h1>
+                    <p class="text-center color-highlight font-600">Student Access</p>
+                    <h1 class="font-40 text-center">
+                        <sup class="price-sup font-14">&#8358;</sup>
+                        <span id="chefpacks">2,000</span>
+                        <sup class="price-sup font-14">.00</sup>
+                    </h1>
+                    <div class="divider mt-4"></div>
+                    <ul class="icon-list pl-3 font-600">
+                        <li><i class="fa fa-check color-yellow-dark"></i> 6 Months User Access</li>
+                        <li><i class="fa fa-check color-yellow-dark"></i> Access All Tutors</li>
+                    </ul>
+                    <div class="divider mt-4"></div>
+
+                    <a href="javascript:payWithMonnify(2000);" class="btn btn-m gradient-yellow rounded-sm btn-center-m font-600">Select Pack</a>
+
+                </div>
+            </div>
+            <div class="card mx-0 card-style mb-3">
+                <div class="content">
+                    <h1 class="text-center"><i class="fa fa-chalkboard-teacher fa-4x color-green-dark"></i></h1>
+                    <h1 class="text-center pt-4 font-30 mb-n1">Best Value</h1>
+                    <p class="text-center color-highlight font-600">Student Access</p>
+                    <h1 class="font-40 text-center">
+                        <sup class="price-sup font-14">&#8358;</sup>
+                        <span id="productpacks">3,500</span>
+                        <sup class="price-sup font-14">.00</sup>
+                    </h1>
+                    <div class="divider mt-4"></div>
+                    <ul class="icon-list pl-3 font-600">
+                        <li><i class="fa fa-check color-green-dark"></i> 1 Year User Access</li>
+                        <li><i class="fa fa-check color-green-dark"></i> Access All Tutors</li>
+                    </ul>
+                    <div class="divider mt-4"></div>
+
+                    <a href="javascript:payWithMonnify(3500);" class="btn btn-m gradient-green rounded-sm btn-center-m font-600">Select Pack </a>
+
+                </div>
+            </div>
+
+            <div class="card mx-0 card-style mb-3">
+                <div class="content">
+                    <h1 class="text-center"><i class="fa fa-chalkboard-teacher fa-4x color-orange-dark"></i></h1>
+                    <h1 class="text-center pt-4 font-30 mb-n1">Life Time</h1>
+                    <p class="text-center color-highlight font-600">Student Access</p>
+                    <h1 class="font-40 text-center">
+                        <sup class="price-sup font-14">&#8358;</sup>
+                        <span id="tutorpacks">35,000</span>
+                        <sup class="price-sup font-14">.00</sup>
+                    </h1>
+                    <div class="divider mt-4"></div>
+                    <ul class="icon-list pl-3 font-600">
+                        <li><i class="fa fa-check color-orange-dark"></i> Life Time User Access</li>
+                        <li><i class="fa fa-check color-orange-dark"></i> Access All Tutors</li>
+                    </ul>
+                    <div class="divider mt-4"></div>
+
+                    <a id="paymentTutorFormBtn" href="javascript:payWithMonnify(35000);" class="btn btn-m gradient-orange rounded-sm btn-center-m font-600">Select Pack</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page content ends here-->
+
+<div id="menu-success-payment"
+     class="menu menu-box-modal bg-green-dark rounded-m"
+     data-dismiss=""
+     data-menu-height="310"
+     data-menu-width="350">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-check-circle scale-box color-white shadow-xl rounded-circle"></i></h1>
+    <h1 class="text-center mt-3 font-700 color-white">All's Good</h1>
+    <p class="boxed-text-l color-white opacity-70">
+        You can continue with your previous actions.<br> Easy to attach these to success calls.
+    </p>
+    <a href="/tutors" class="btn btn-m btn-center-m button-s shadow-l rounded-s text-uppercase font-600 bg-white color-black">Great, Thanks!</a>
+</div>
+
+<script type="text/javascript" src="/js/PaymentScript.js"></script>
+<script type="text/javascript">
+
+    getItemPacks();
+    if (localStorage.getItem("loaded") == null) {
+        localStorage.setItem("loaded", "loaded");
+        location.reload();
+    }
+
+
+</script>
+
+
+
+<!--------------->
+<!--------------->
+<!--Menu Option-->
+<!--------------->
+<!--------------->
+<div id="menu-cancel-payment"
+     class="menu menu-box-modal rounded-m"
+     data-menu-height="200"
+     data-menu-width="350">
+    <div class="menu-title">
+        <i class="fa fa-question-circle scale-box float-left mr-3 ml-3 fa-3x mt-1 color-blue-dark"></i>
+        <p class="color-highlight">Payment</p>
+        <h1 class="font-20">Process Canceled</h1>
+        <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+    </div>
+    <div class="content mt-0">
+        <p class="pr-3">
+            Your payment process been canceled!
+        </p>
+        <div class="row mb-0">
+            <div class="col-6">
+
+            </div>
+            <div class="col-6">
+                <a href="#" class="btn close-menu btn-full btn-m bg-green-dark font-600 rounded-s">Ok!</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="menu-success-1" class="menu menu-box-bottom rounded-m"
+     data-menu-height="185"
+     data-menu-effect="menu-over">
+    <div class="menu-title">
+        <i class="fa fa-check-circle scale-box float-left mr-3 ml-3 fa-4x color-green-dark"></i>
+        <p class="color-highlight">The task has been a</p>
+        <h1>Success</h1>
+        <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+    </div>
+    <div class="content mt-0 mb-0">
+        <p class="pr-3">
+            Thank you for successfully completing this action. This message can now be dismissed manually or programatically.
+        </p>
+    </div>
+</div>
+
+<div id="menu-success-2" class="menu menu-box-bottom bg-green-dark rounded-m"
+     data-menu-height="335"
+     data-menu-effect="menu-over">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-check-circle scale-box color-white shadow-xl rounded-circle"></i></h1>
+    <h1 class="text-center mt-3 font-700 color-white">All's Good</h1>
+    <p class="boxed-text-l color-white opacity-70">
+        Your subscription was successful.<br> You can continue with your previous actions.
+    </p>
+    <a href="/health" class="btn btn-m btn-center-m button-s shadow-l rounded-s text-uppercase font-600 bg-white color-black">Great, Thanks!</a>
+</div>
+
+<div id="menu-tutor-dash" class="menu menu-box-bottom bg-green-dark rounded-m"
+     data-menu-height="335"
+     data-menu-effect="menu-over">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-check-circle scale-box color-white shadow-xl rounded-circle"></i></h1>
+    <h1 class="text-center mt-3 font-700 color-white">All's Good</h1>
+    <p class="boxed-text-l color-white opacity-70">
+        Your subscription was successful.<br> You can continue with your previous actions.
+    </p>
+    <a href="/tutors/tutordash" class="btn btn-m btn-center-m button-s shadow-l rounded-s text-uppercase font-600 bg-white color-black">Great, Thanks!</a>
+</div>
+<div id="menu-tutor-index" class="menu menu-box-bottom bg-green-dark rounded-m"
+     data-menu-height="335"
+     data-menu-effect="menu-over">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-check-circle scale-box color-white shadow-xl rounded-circle"></i></h1>
+    <h1 class="text-center mt-3 font-700 color-white">All's Good</h1>
+    <p class="boxed-text-l color-white opacity-70">
+        Your subscription was successful.<br> You can continue with your previous actions.
+    </p>
+    <a href="/tutors" class="btn btn-m btn-center-m button-s shadow-l rounded-s text-uppercase font-600 bg-white color-black">Great, Thanks!</a>
+</div>
+
+<div id="menu-warning-1" class="menu menu-box-bottom rounded-m"
+     data-menu-height="185"
+     data-menu-effect="menu-over">
+    <div class="menu-title">
+        <i class="fa fa-times-circle float-left mr-3 scale-box ml-3 fa-4x color-red-dark"></i>
+        <p class="color-highlight">The update has</p>
+        <h1>Failed</h1>
+        <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+    </div>
+    <div class="content mt-0 mb-0">
+        <p class="pr-3">
+            Payment was successful but the update task on your payment has failed. Please contact us using our contact details.
+    </div>
+</div>
+
+<div id="menu-warning-2" class="menu menu-box-bottom bg-red-dark rounded-m"
+     data-menu-height="335"
+     data-menu-effect="menu-over">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-times-circle scale-box color-white shadow-xl rounded-circle"></i></h1>
+    <h1 class="text-center mt-3 text-uppercase color-white font-700">Wooops!</h1>
+    <p class="boxed-text-l color-white opacity-70">
+        Your payment was not successful due to network issue.<br> Please try again later.
+    </p>
+    <a href="#" class="close-menu btn btn-m btn-center-l button-s shadow-l rounded-s text-uppercase font-600 bg-white color-black">Hmmm, Check again?</a>
+</div>
+
+<div id="menu-loading-error" class="menu menu-box-bottom bg-red-dark rounded-m"
+     data-menu-height="335"
+     data-menu-effect="menu-over">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-times-circle scale-box color-white shadow-xl rounded-circle"></i></h1>
+    <h1 class="text-center mt-3 text-uppercase color-white font-700">Oh no!</h1>
+    <p class="boxed-text-l color-white opacity-70">
+        Page not loading due to network issue.<br> Please try again later.
+    </p>
+    <a href="javascript:location.reload();" class="btn btn-m btn-center-l button-s shadow-l rounded-s text-uppercase font-600 bg-white color-black">Hmmm, Reload again?</a>
+</div> 

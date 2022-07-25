@@ -1,0 +1,124 @@
+﻿@page
+@model MeetSpotOn.Pages.Client.IndexModel
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <title>AppKit Mobile</title>
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">
+    <link rel="manifest" href="_manifest.json" data-pwa-version="set_in_manifest_and_pwa_js">
+    <link rel="apple-touch-icon" sizes="180x180" href="app/icons/icon-192x192.png">
+</head>
+
+<body class="theme-dark">
+
+    <div id="preloader"><div class="spinner-border color-highlight" role="status"></div></div>
+
+    <div id="page">
+
+        <div class="header header-fixed header-logo-center header-auto-show">
+            <a href="/" class="header-title">Spot-On</a>
+        </div>
+
+
+        <div class="page-title page-title-fixed">
+            <h1>Spot-On</h1>
+        </div>
+        <div class="page-title-clear"></div>
+
+        <div class="page-content">
+            <div class="card card-style">
+                <div class="content text-center">
+                </div>
+            </div>
+            <div class="card card-style">
+                <div class="content text-center">
+                    <img id="doc-img" src="images/pictures/faces/4s.png" class="mx-auto rounded-circle shadow-xl " width="150">
+                    <h1 class="mt-4 font-20 font-700 mb-n1" id="full-name">Alexander Stranger</h1>
+                    <span>
+
+                        <i class="fa fa-calendar font-18 color-yellow-dark"></i> @DateTime.Now.ToShortDateString() -
+                        <i class="fa fa-clock font-18 color-yellow-dark"></i> @DateTime.Now.ToShortTimeString()
+                        <p class="line-height-l boxed-text-xl font-14 pb-3">
+
+                        </p>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+        <!-- Page content ends here-->
+        <!-- Main Menu-->
+        <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-load="menu-main.html" data-menu-width="280" data-menu-active="nav-components"></div>
+
+        <!-- Share Menu-->
+        <div id="menu-share" class="menu menu-box-bottom rounded-m" data-menu-load="menu-share.html" data-menu-height="370"></div>
+
+        <!-- Colors Menu-->
+        <div id="menu-colors" class="menu menu-box-bottom rounded-m" data-menu-load="menu-colors.html" data-menu-height="480"></div>
+
+
+    </div>
+
+
+    <!--------------->
+    <!--------------->
+    <!--Menu Option-->
+    <!--------------->
+    <!--------------->
+    <div id="menu-doctor-on-call"
+         class="menu menu-box-modal rounded-m"
+         data-menu-height="200"
+         data-menu-width="350">
+        <div class="menu-title">
+            <i class="fa fa-question-circle scale-box float-left mr-3 ml-3 fa-3x mt-1 color-blue-dark"></i>
+            <p class="color-highlight">Busy,</p>
+            <h1 class="font-20">User Busy</h1>
+            <a href="#" class="close-menu"><i class="fa fa-phone-slash"></i></a>
+        </div>
+        <div class="content mt-0">
+            <p class="pr-3">
+                The Doctor is on another call. Please try again shortly!
+            </p>
+            <div class="row mb-0">
+                <div class="col-6">
+                    <a href="#" class="btn close-menu btn-full btn-m bg-red-dark font-600 rounded-s">No, cancel</a>
+                </div>
+                <div class="col-6">
+                    <a href="#" class="btn close-menu btn-full btn-m bg-green-dark font-600 rounded-s">Yes, proceed!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="/scripts/jquery.js"></script>
+    <script type="text/javascript" src="/scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/scripts/custom.js"></script>
+    <script type="text/javascript" src="~/js/site.js"></script>
+    <script type="text/javascript">
+        function CallJav(val) {
+            $("#menu-doctor-on-call").showMenu();
+        }
+        //LoadPhoto("http://medicall-002-site5.ctempurl.com/uploads/12.jpg",12);
+        //console.log(location.search);
+        var _query = location.search.split('=') ;
+        //console.log(_query[1]);
+        LoadPhoto(_query[1]);
+        function LoadPhoto(username) {
+              
+            LoadDocPhoto(username);
+        }
+    </script>
+</body>

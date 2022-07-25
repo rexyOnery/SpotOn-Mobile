@@ -1,0 +1,371 @@
+﻿@page
+@model SpotOn.Pages.Artisan.IndexModel
+@{
+}
+
+<div class="page-content">
+
+    <div class="task-slider owl-carousel owl-no-dots" id="artisan_types_x">
+        <a href='javascript:setFocusTo(1);'>
+            <div data-card-height='170' class='card rounded-m shadow-l bg-taylor' style="background-image: url(../images/pictures/taylor.jpg)">
+                <div class='card-bottom'>
+                    <h4 class='color-white font-15 mb-3 ml-3'>Taylor</h4>
+                </div>
+                <div class='card-overlay bg-gradient'></div>
+            </div>
+        </a>
+        <a href='javascript:setFocusTo(2);'>
+            <div data-card-height='170' class='card rounded-m shadow-l bg-hair-stylist' style="background-image: url(../images/pictures/hair-stylist.png)">
+                <div class='card-bottom'>
+                    <h4 class='color-white font-15 mb-3 ml-3'>Hair <br />Stylist</h4>
+                </div>
+                <div class='card-overlay bg-gradient'></div>
+            </div>
+        </a>
+        <a href='javascript:setFocusTo(3);'>
+            <div data-card-height='170' class='card rounded-m shadow-l bg-barber' style="background-image: url(../images/pictures/barber.png)">
+                <div class='card-bottom'>
+                    <h4 class='color-white font-15 mb-3 ml-3'>Barber</h4>
+                </div>
+                <div class='card-overlay bg-gradient'></div>
+            </div>
+        </a>
+        <a href='javascript:setFocusTo(4);'>
+            <div data-card-height='170' class='card rounded-m shadow-l bg-cobbler' style="background-image: url(../images/pictures/cobbler.png)">
+                <div class='card-bottom'>
+                    <h4 class='color-white font-15 mb-3 ml-3'>Shoe<br />Cobbler</h4>
+                </div>
+                <div class='card-overlay bg-gradient'></div>
+            </div>
+        </a>
+        <a href='javascript:setFocusTo(5);'>
+            <div data-card-height='170' class='card rounded-m shadow-l bg-make-up' style="background-image: url(../images/pictures/make-up.png)">
+                <div class='card-bottom'>
+                    <h4 class='color-white font-15 mb-3 ml-3'>Make-Up <br />Artist</h4>
+                </div>
+                <div class='card-overlay bg-gradient'></div>
+            </div>
+        </a>
+        <a href='javascript:setFocusTo(6);'>
+            <div data-card-height='170' class='card rounded-m shadow-l bg-plumber' style="background-image: url(../images/pictures/plumber.png)">
+                <div class='card-bottom'>
+                    <h4 class='color-white font-15 mb-3 ml-3'>Plumber</h4>
+                </div>
+                <div class='card-overlay bg-gradient'></div>
+            </div>
+        </a>
+        <a href='javascript:setFocusTo(7);'>
+            <div data-card-height='170' class='card rounded-m shadow-l bg-carpenter' style="background-image: url(../images/pictures/carpenter.png)">
+                <div class='card-bottom'>
+                    <h4 class='color-white font-15 mb-3 ml-3'>Carpenter</h4>
+                </div>
+                <div class='card-overlay bg-gradient'></div>
+            </div>
+        </a>
+        <a href='javascript:setFocusTo(8);'>
+            <div data-card-height='170' class='card rounded-m shadow-l bg-mechanic' style="background-image: url(../images/pictures/mechanic.png)">
+                <div class='card-bottom'>
+                    <h4 class='color-white font-15 mb-3 ml-3'>Mechanic</h4>
+                </div>
+                <div class='card-overlay bg-gradient'></div>
+            </div>
+        </a>
+        <a href='javascript:setFocusTo(9);'>
+            <div data-card-height='170' class='card rounded-m shadow-l bg-photography' style="background-image: url(../images/pictures/photography.png)">
+                <div class='card-bottom'>
+                    <h4 class='color-white font-15 mb-3 ml-3'>Photography</h4>
+                </div>
+                <div class='card-overlay bg-gradient'></div>
+            </div>
+        </a>
+
+        <a href='javascript:setFocusTo(10);'>
+            <div data-card-height='170' class='card rounded-m shadow-l bg-electrician' style="background-image: url(../images/pictures/electrician.png)">
+                <div class='card-bottom'>
+                    <h4 class='color-white font-15 mb-3 ml-3'>Electrician</h4>
+                </div>
+                <div class='card-overlay bg-gradient'></div>
+            </div>
+        </a>
+        <a href='javascript:setFocusTo(11);'>
+            <div data-card-height='170' class='card rounded-m shadow-l bg-electrician' style="background-image: url(../images/pictures/painter.png)">
+                <div class='card-bottom'>
+                    <h4 class='color-white font-15 mb-3 ml-3'>Painter</h4>
+                </div>
+                <div class='card-overlay bg-gradient'></div>
+            </div>
+        </a>
+    </div>
+
+
+    <div class="card card-style shadow-xl">
+        <div class="content">
+            <p class="color-highlight font-600 mb-n1">Search filter for</p>
+            <h1 class="font-24 font-700 mb-2"><span id="art_type">Artisans</span> <i class="fa fa-filter mt-n2 font-30 color-yellow-dark float-right mr-2 scale-box"></i></h1>
+            <p class="mb-1">
+
+            </p>
+            <div class="accordion" id="accordion-m">
+                <div class="mb-0">
+                    <button class="btn accordion-btn border-0 color-theme" data-toggle="collapse" data-target="#collapsem">
+                        <i class="fa fa-filter color-red-dark mr-2"></i>
+                        <span class="color-highlight font-600 mb-n1">Narrow your search to a specific location. Click here to begin.</span>
+                        <i class="fa fa-plus font-10 accordion-icon"></i>
+                    </button>
+                    <div id="collapsem" class="collapse" data-parent="#accordion-1">
+                        <div class="accordion" id="accordion-1">
+                            <div class="mb-1">
+                                <button class="btn accordion-btn border-0 color-theme" data-toggle="collapse" data-target="#collapse2">
+                                    <i class="fa fa-map color-blue-dark mr-2"></i>
+                                    Filter By State
+                                    <i class="fa fa-chevron-down font-10 accordion-icon"></i>
+                                </button>
+                                <div id="collapse2" class="collapse" data-parent="#accordion-1">
+                                    <div class="input-style input-style-2 mb-3 pb-1">
+                                        <span class="input-style-1-active">State</span>
+                                        <em>(required)</em>
+                                        <select id="state" onchange="javascript: getLocalAreas();">
+                                        </select>
+                                    </div>
+                                    <div id="state_empty" class="hidden mb-1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <button class="btn accordion-btn border-0 color-theme" data-toggle="collapse" data-target="#collapse3">
+                                    <i class="fa fa-map-marker color-blue-dark mr-2"></i>
+                                    Filter By Local Government
+                                    <i class="fa fa-chevron-down font-10 accordion-icon"></i>
+                                </button>
+                                <div id="collapse3" class="collapse" data-parent="#accordion-1">
+                                    <div class="input-style input-style-2 mb-3 pb-1">
+                                        <span class="input-style-1-active">Local Area</span>
+                                        <em>(required)</em>
+                                        <select id="lga">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div id="state_empty" class="hidden mb-1">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <button class="btn accordion-btn border-0 color-theme" data-toggle="collapse" data-target="#collapse4">
+                                    <i class="fa fa-location-arrow color-blue-dark mr-2"></i>
+                                    Enter Location
+                                    <i class="fa fa-chevron-down font-10 accordion-icon"></i>
+                                </button>
+                                <div id="collapse4" class="collapse" data-parent="#accordion-1">
+                                    <div class="input-style input-style-2 mb-3 pb-1">
+                                        <span class="input-style-1-active">Location</span>
+                                        <em>(required)</em>
+                                        <input type="name" id="location" placeholder="Enter your location" />
+                                    </div>
+                                </div>
+                                <div id="local_empty" class="hidden mb-1">
+                                </div>
+                            </div>
+
+                            <a href="javascript: filterArtisan();" id="btnFilterArtisan" class="btn btn-xxs mb-3 rounded-s text-uppercase font-900 shadow-s bg-highlight float-right">Filter Artisan </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+        <div class="card card-full-left card-style" style="margin-bottom:5px">
+            <div class="content" id="docItems">
+
+            </div>
+            <div class="row mb-5" id="item-preloader">
+                <div class="col-12">
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-border color-blue-dark" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <nav aria-label="pagination-demo">
+                <ul class="pagination pagination-justify-content-center" id="page-items">
+                </ul>
+            </nav>
+        </div> 
+    </div>
+</div>
+
+
+<div id="menu-option-2" class="menu menu-box-bottom rounded-m"
+     data-menu-height="330"
+     data-menu-effect="menu-over">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-info-circle scale-box color-blue-dark shadow-xl rounded-circle"></i></h1>
+    <h3 class="text-center mt-3 font-700">No Result?</h3>
+    <p class="boxed-text-xl opacity-70">
+        Your search returns no result.<br> Do you want to advertise this position?<br />It's free!.
+    </p>
+    <div class="row mb-0 mr-3 ml-3">
+        <div class="col-6">
+            <a href="#" class="btn close-menu btn-full btn-m color-red-dark border-red-dark font-600 rounded-s">No, cancel</a>
+        </div>
+        <div class="col-6">
+            <a href="javascript:advertise();" class="btn btn-full btn-m color-green-dark border-green-dark font-600 rounded-s">Yes, Advertie!</a>
+        </div>
+    </div>
+</div>
+
+<div id="success_menu"
+     class="menu menu-box-modal rounded-m"
+     data-menu-hide="1000"
+     data-menu-width="220"
+     data-menu-height="160">
+    <h1 class="text-center fa-5x mt-2 pt-3 pb-2"><i class="fa fa-check-circle color-green-dark"></i></h1>
+    <h2 class="text-center">Success</h2>
+</div>
+<div id="error_menu"
+     class="menu menu-box-modal rounded-m"
+     data-menu-hide="1000"
+     data-menu-width="220"
+     data-menu-height="160">
+    <h1 class="text-center fa-5x mt-2 pt-3 pb-2"><i class="fa fa-times-circle color-red-dark"></i></h1>
+    <h2 class="text-center">Task Failed</h2>
+</div>
+
+<div id="menu-warning-error"
+     class="menu menu-box-modal bg-red-dark rounded-m"
+     data-menu-height="310"
+     data-menu-width="355">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-times-circle scale-box color-white shadow-xl rounded-circle"></i></h1>
+    <h1 class="text-center mt-3 text-uppercase color-white font-500"><span id="menu-title-error"></span></h1>
+    <p class="boxed-text-l color-white opacity-70">
+        <span id="warningTextError"></span>
+    </p>
+    <a href="#" class="btn close-menu btn-m btn-center-l button-s shadow-l rounded-s text-uppercase font-600 bg-white color-black">Close</a>
+</div>
+
+<div id="menu-error"
+     class="menu menu-box-modal bg-red-dark rounded-m"
+     data-menu-height="310"
+     data-menu-width="355">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-times-circle scale-box color-white shadow-xl rounded-circle"></i></h1>
+    <h1 class="text-center mt-3 text-uppercase color-white font-700"><span id="title-error"></span></h1>
+    <p class="boxed-text-l color-white opacity-70">
+        <span id="TextError"></span>
+    </p>
+    <a href="javascript:location.reload();" class="btn btn-m btn-center-l button-s shadow-l rounded-s text-uppercase font-600 bg-white color-black">Try Again?</a>
+</div>
+
+<div id="menu-code-fail"
+     class="menu menu-box-modal rounded-m"
+     data-menu-height="350"
+     data-menu-width="350">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-check-circle color-red-dark"></i></h1>
+    <h1 class="text-center text-uppercase font-900" id="failedTitle"></h1>
+    <p class="boxed-text-l mt-2 mb-3 pb-3" id="failedText">
+    </p>
+    <a href="#" class="close-menu btn btn-m btn-center-m button-s shadow-l rounded-s font-600 bg-red-light">Sorry</a>
+</div>
+
+<div id="menu-code-okay"
+     class="menu menu-box-modal rounded-m"
+     data-menu-height="350"
+     data-menu-width="350">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-check-circle color-green-dark"></i></h1>
+    <h1 class="text-center text-uppercase font-900">Advert Places!</h1>
+    <p class="boxed-text-l mt-2 mb-3 pb-3">
+        Your Artisan filter returned no result.<br>However, we have placed an advert in regard of this.<br /> You can now continue.
+    </p>
+    <a href="#" class="btn close-menu btn-m btn-center-m button-s shadow-l rounded-s font-600 bg-green-light">Great</a>
+</div>
+
+
+<div id="menu_option_no_network" class="menu menu-box-bottom rounded-m"
+     data-menu-height="330"
+     data-menu-effect="menu-over">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-info-circle scale-box color-blue-dark shadow-xl rounded-circle"></i></h1>
+    <h3 class="text-center mt-3 font-700">Network Error!</h3>
+    <p class="boxed-text-xl opacity-70">
+        There was an error connecting to the server! <br />Chat not initiated.
+    </p>
+    <div class="row mb-0 mr-3 ml-3">
+
+        <div class="col-12">
+            <a href="javascript: location.reload();" class="btn btn-full btn-m color-green-dark border-green-dark font-600 rounded-s">Re=Initiate Chat</a>
+        </div>
+    </div>
+</div>
+
+<div id="menu_warning_wrong" class="menu menu-box-bottom rounded-m"
+     data-menu-height="330"
+     data-menu-effect="menu-over">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-info-circle scale-box color-blue-dark shadow-xl rounded-circle"></i></h1>
+    <h3 class="text-center mt-3 font-700">Something Wrong!</h3>
+    <p class="boxed-text-xl opacity-70">
+        Un-expected system failure. <br />Please try again.
+    </p>
+    <div class="row mb-0 mr-3 ml-3">
+
+        <div class="col-12">
+            <a href="javascript: location.reload();" class="btn btn-full btn-m color-green-dark border-green-dark font-600 rounded-s">Re=Initiate Chat</a>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/scripts/UtilityScript.js"></script>
+<script type="text/javascript" src="~/js/LocationScript.js"></script>
+<script type="text/javascript" src="~/js/artisanScript.js"></script>
+
+<script type="text/javascript">
+
+    getStates();
+    getArtisanTypes();
+
+    getAllArtisans();
+    getArtisanItems();
+
+    var _artisanFilter = 0;
+
+    function setFocusTo(id) {
+        _artisanFilter = id;
+        
+        switch (id) {
+            case 1:
+                $("#art_type").html("Tailor");
+                break;
+            case 2:
+                $("#art_type").html("Hair Stylist"); 
+                break;
+            case 3:
+                $("#art_type").html("Barber"); 
+                break;
+            case 4:
+                $("#art_type").html("Shoe Cobbler"); 
+                break;
+            case 5:
+                $("#art_type").html("Make-Up Artist"); 
+                break;
+            case 6:
+                $("#art_type").html("Plumber"); 
+                break;
+            case 7:
+                $("#art_type").html("Carpenter"); 
+                break;
+            case 8:
+                $("#art_type").html("Mechanic"); 
+                break;
+            case 9:
+                $("#art_type").html("Photography"); 
+                break;
+            case 10:
+                $("#art_type").html("Electrician"); 
+                break;
+            case 11:
+                $("#art_type").html("Painter"); 
+                break;
+        }
+
+        getArtisansByType(id);
+    }
+</script>

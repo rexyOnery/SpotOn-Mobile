@@ -1,0 +1,319 @@
+﻿@page
+@model MeetSpotOn.Pages.UserSelectModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <title>Spot-On Mobile</title>
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">
+    <link rel="manifest" href="_manifest.json" data-pwa-version="set_in_manifest_and_pwa_js">
+    <link rel="apple-touch-icon" sizes="180x180" href="app/icons/icon-192x192.png">
+
+</head>
+
+<body class="theme-dark">
+
+    <div id="preloader"><div class="spinner-border color-highlight" role="status"></div></div>
+
+    <div id="page">
+
+        <div class="header header-fixed header-logo-center header-auto-show">
+            <a href="index.html" class="header-title">Spot-On</a>
+            <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+            <a href="#" data-menu="menu-main" class="header-icon header-icon-4"><i class="fas fa-bars"></i></a>
+            <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-dark"><i class="fas fa-sun"></i></a>
+            <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-light"><i class="fas fa-moon"></i></a>
+        </div>
+
+        <div id="footer-bar" class="footer-bar-6">
+            <a id="foot-1"><i class="fa fa-box"></i><span>Artisan</span></a>
+            <a id="foot-2"><i class="fa fa-utensils"></i><span>Chef</span></a>
+            <a id="foot-3" class="circle-nav active-nav"><i class="fa fa-stethoscope"></i><span>Health</span></a>
+            <a id="foot-4"><i class="fa fa-shopping-cart"></i><span>Products</span></a>
+            <a id="foot-5"><i class="fa fa-chalkboard-teacher"></i><span>Tutors</span></a>
+
+        </div>
+
+        <div class="page-title page-title-fixed">
+            <h1>Choose Path</h1>
+            <a href="#" class="page-title-icon shadow-xl bg-theme color-theme" data-menu="menu-share"><i class="fa fa-share-alt"></i></a>
+            <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-light" data-toggle-theme><i class="fa fa-moon"></i></a>
+            <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-dark" data-toggle-theme><i class="fa fa-lightbulb color-yellow-dark"></i></a>
+            <a href="#" class="page-title-icon shadow-xl bg-theme color-theme" data-menu="menu-main"><i class="fa fa-bars"></i></a>
+        </div>
+        <div class="page-title-clear"></div>
+
+        <div class="page-content">
+
+
+            <div class="card card-style">
+                <div class="content">
+                    <h4>Select Your Spot-On Path</h4>
+                    <p class="pb-0">
+                        Select below a pack to register under.
+                    </p>
+                </div>
+            </div>
+
+            <div class="divider divider-margins"></div>
+
+            <div class="card card-style mb-5">
+                <div class="content">
+                    <h4> <i class="fa fa-user-friends color-white-light ml-3 font-34 mt-1"></i> Users</h4>
+                    <p class="pb-0">
+                        Choose this path if you're seeking to use any of the packs available on Spot-On.
+                    </p>
+                    <p>
+                        <div class="form-check icon-check">
+                            <input class="form-check-input" type="checkbox"  value="" id="checkP">
+                            <label class="form-check-label color-white" for="checkP"> Read Our Terms and Policy to Continue </label>
+                            <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
+                            <i class="icon-check-2 far fa-check-circle font-16 color-highlight"></i>
+                        </div>
+                    </p>
+                </div>
+
+                <button id="btnIOSUser" onclick="javascript: SetRegistration('user');" class="hidden show-ios btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as a User</button>
+                <button id="btnAndroidUser" onclick="javascript: SetRegistration('user');" class="hidden show-android btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as a User</button>
+
+                <button id="btnIOS" data-toast="notification-1" class="show-ios btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as a User</button>
+                <button id="btnAndroid" data-toast="notification-3" class="show-android btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as a User</button>
+            </div>
+
+            <div class="divider-icon divider-margins bg-red-dark"><i class="fa font-17 color-blue-dark fa-cog"></i></div>
+
+            <div class="card card-style">
+                <div class="content">
+                    <h4><i class="fa fa-toolbox color-white-light ml-3 font-34 mt-1"></i> Artisan</h4>
+                    <p class="pb-0">
+                        Choose this path if you want to provide services on this platform as an Artisan.
+                    </p>
+                    <p>
+                        <div class="form-check icon-check">
+                            <input class="form-check-input" type="checkbox" value="" id="checkArt">
+                            <label class="form-check-label color-white" for="checkArt"> Read Our Terms and Policy to Continue </label>
+                            <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
+                            <i class="icon-check-2 far fa-check-circle font-16 color-highlight"></i>
+                        </div>
+                    </p>
+                </div>
+
+                <button id="artIOSUser" onclick="javascript: SetRegistration('artisan');" class="hidden show-ios btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as an Artisan</button>
+                <button id="artAndroidUser" onclick="javascript: SetRegistration('artisan');" class="hidden show-android btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as an Artisan</button>
+
+                <button id="artIOS" data-toast="notification-1" class="show-ios btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as an Artisan</button>
+                <button id="artAndroid" data-toast="notification-3" class="show-android btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as an Artisan</button>
+            </div>
+            <div class="hidden">
+                <div class="divider-icon divider-margins bg-red-dark"><i class="fa font-17 color-blue-dark fa-cog"></i></div>
+
+                <div class="card card-style">
+                    <div class="content">
+                        <h4><i class="fa fa-utensil-spoon color-white-dark ml-3 font-34 mt-1"></i> Chef</h4>
+                        <p class="pb-0">
+                            Choose this path if you want to provide services on this platform as an Chef.
+                        </p>
+                        <p>
+                            <div class="form-check icon-check">
+                                <input class="form-check-input" type="checkbox" onchange="CheckChangeChef()" value="" id="checkChef">
+                                <label class="form-check-label color-white" for="checkChef"> Read Our Terms and Policy to Continue </label>
+                                <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
+                                <i class="icon-check-2 far fa-check-circle font-16 color-highlight"></i>
+                            </div>
+                        </p>
+                    </div>
+
+                    <button id="chefIOSUser" onclick="javascript: SetRegistration('chef');" class="hidden show-ios btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as a Chef</button>
+                    <button id="chefAndroidUser" onclick="javascript: SetRegistration('chef');" class="hidden show-android btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as a Chef</button>
+
+                    <button id="chefIOS" data-toast="notification-1" class="show-ios btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as a Chef</button>
+                    <button id="chefAndroid" data-toast="notification-3" class="show-android btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as a Chef</button>
+                </div>
+
+                <div class="divider-icon divider-margins bg-red-dark"><i class="fa font-17 color-blue-dark fa-cog"></i></div>
+
+                <div class="card card-style">
+                    <div class="content">
+                        <h4><i class="fa fa-stethoscope color-white-light ml-3 font-34 mt-1"></i> Health</h4>
+                        <p class="pb-0">
+                            Choose this path if you want to provide services on this platform as a Health Provider.
+                        </p>
+                        <p>
+                            <div class="form-check icon-check">
+                                <input class="form-check-input" type="checkbox" onchange="CheckChangeHealth()" value="" id="checkHealth">
+                                <label class="form-check-label color-white" for="checkHealth"> Read Our Terms and Policy to Continue </label>
+                                <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
+                                <i class="icon-check-2 far fa-check-circle font-16 color-highlight"></i>
+                            </div>
+                        </p>
+                    </div>
+
+                    <button id="healthIOSUser" onclick="javascript: SetRegistration('health');" class="hidden show-ios btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as a Health Provider</button>
+                    <button id="healthAndroidUser" onclick="javascript: SetRegistration('health');" class="hidden show-android btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as a Health Provider</button>
+
+                    <button id="healthIOS" data-toast="notification-1" class="show-ios btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as a Health Provider</button>
+                    <button id="healthAndroid" data-toast="notification-3" class="show-android btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as a Health Provider</button>
+                </div>
+
+                <div class="divider-icon divider-margins bg-red-dark"><i class="fa font-17 color-blue-dark fa-cog"></i></div>
+
+                <div class="card card-style">
+                    <div class="content">
+                        <h4><i class="fa fa-shopping-cart color-white-light ml-3 font-34 mt-1"></i> Products</h4>
+                        <p class="pb-0">
+                            Choose this path if you want to sell products on this platform.
+                        </p>
+                        <p>
+                            <div class="form-check icon-check">
+                                <input class="form-check-input" type="checkbox" onchange="CheckChangeProduct()" value="" id="checkProduct">
+                                <label class="form-check-label color-white" for="checkProduct"> Read Our Terms and Policy to Continue </label>
+                                <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
+                                <i class="icon-check-2 far fa-check-circle font-16 color-highlight"></i>
+                            </div>
+                        </p>
+                    </div>
+
+                    <button id="productIOSUser" onclick="javascript: SetRegistration('product');" class="hidden show-ios btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as a Dealer</button>
+                    <button id="productAndroidUser" onclick="javascript: SetRegistration('product');" class="hidden show-android btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as a Dealer</button>
+
+                    <button id="productIOS" data-toast="notification-1" class="show-ios btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as a Dealer</button>
+                    <button id="productAndroid" data-toast="notification-3" class="show-android btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as a Dealer</button>
+                </div>
+
+                <div class="divider-icon divider-margins bg-red-dark"><i class="fa font-17 color-blue-dark fa-cog"></i></div>
+            </div>
+            <div class="hidden">
+                <div class="card card-style">
+                    <div class="content">
+                        <h4><i class="fa fa-chalkboard-teacher color-white-light ml-3 font-34 mt-1"></i> Tutor</h4>
+                        <p class="pb-0">
+                            Choose this path if you want to provide services on this platform as a Tutor.
+                        </p>
+                        <p>
+                            <div class="form-check icon-check">
+                                <input class="form-check-input" type="checkbox" onchange="CheckChangeTutor()" value="" id="checkTutor">
+                                <label class="form-check-label color-white" for="checkTutor"> Read Our Terms and Policy to Continue </label>
+                                <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
+                                <i class="icon-check-2 far fa-check-circle font-16 color-highlight"></i>
+                            </div>
+                        </p>
+                    </div>
+
+                    <button id="tutorIOSUser" onclick="javascript: SetRegistration('tutor');" class="hidden show-ios btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as a Tutor</button>
+                    <button id="tutorAndroidUser" onclick="javascript: SetRegistration('tutor');" class="hidden show-android btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as a Tutor</button>
+
+                    <button id="tutorIOS" data-toast="notification-1" class="show-ios btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as a Tutor</button>
+                    <button id="tutorAndroid" data-toast="notification-3" class="show-android btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as a Tutor</button>
+                </div>
+                <div class="">
+                    <div class="divider-icon divider-margins bg-red-dark"><i class="fa font-17 color-blue-dark fa-cog"></i></div>
+
+                    <div class="card card-style">
+                        <div class="content">
+                            <h4><i class="fa fa-taxi color-white-light ml-3 font-34 mt-1"></i> Taxi / Chauffeur</h4>
+                            <p class="pb-0">
+                                Choose this path if you want to provide services on this platform as a Chauffeur.
+                            </p>
+                            <p>
+                                <div class="form-check icon-check">
+                                    <input class="form-check-input" type="checkbox" onchange="CheckChangeTaxi()" value="" id="checkTaxi">
+                                    <label class="form-check-label color-white" for="checkTaxi"> Read Our Terms and Policy to Continue </label>
+                                    <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
+                                    <i class="icon-check-2 far fa-check-circle font-16 color-highlight"></i>
+                                </div>
+                            </p>
+                        </div>
+
+                        <button id="taxiIOSUser" onclick="javascript: SetRegistration('taxi');" class="hidden show-ios btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as a Chauffeur</button>
+                        <button id="taxiAndroidUser" onclick="javascript: SetRegistration('taxi');" class="hidden show-android btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as a Chauffeur</button>
+
+                        <button id="taxiIOS" data-toast="notification-1" class="show-ios btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as a Chauffeur</button>
+                        <button id="taxiAndroid" data-toast="notification-3" class="show-android btn btn-border btn-m btn-full mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Register as a Chauffeur</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page content ends here-->
+        <!-- Main Menu-->
+        <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-load="menu-main.html" data-menu-width="280" data-menu-active="nav-components"></div>
+
+        <!-- Share Menu-->
+        <div id="menu-share" class="menu menu-box-bottom rounded-m" data-menu-load="menu-share.html" data-menu-height="370"></div>
+
+        <!-- Colors Menu-->
+        <div id="menu-colors" class="menu menu-box-bottom rounded-m" data-menu-load="menu-colors.html" data-menu-height="480"></div>
+
+
+    </div>
+    <div id="notification-1" data-dismiss="notification-1" data-delay="5000" data-autohide="true" class="notification notification-ios bg-dark-dark ml-2 mr-2 mt-2 rounded-s">
+        <span class="notification-icon color-white rounded-s">
+            <i class="fa fa-bell"></i>
+            <em>Notification</em>
+            <i data-dismiss="notification-1" class="fa fa-times-circle"></i>
+        </span>
+        <h1 class="font-18 color-white mb-n3">Error!</h1>
+        <p class="pt-1">
+            Please Read Our Terms and Policy to Continue.
+        </p>
+    </div>
+
+    <div id="notification-3" data-dismiss="notification-2" data-delay="5000" data-autohide="true" class="notification notification-android bg-dark-dark">
+        <i class="fa fa-bell bg-yellow-dark"></i>
+        <h1 class="font-20 color-white">Notification</h1>
+
+        <p class="pb-0">
+            Please Read Our Terms and Policy to Continue.
+        </p>
+
+    </div>
+    <div id="failed-task"
+         class="menu menu-box-modal rounded-m"
+         data-menu-hide="1000"
+         data-menu-width="220"
+         data-menu-height="160">
+        <h1 class="text-center fa-5x mt-2 pt-3 pb-2"><i class="fa fa-times-circle color-red-dark"></i></h1>
+        <h2 class="text-center">Coming soon!</h2>
+    </div>
+
+
+
+
+    <div id="menu-trial"
+         class="menu menu-box-modal rounded-m"
+         data-menu-height="101%"
+         data-menu-width="101%">
+        <a href="#" class="close-menu icon icon-xs rounded-xl bg-red-dark mt-3 float-right mr-3"><i class="fa fa-times"></i></a>
+        <div class="content">
+
+            <h2 class="bolder bottom-15">Privacy Policy</h2>
+            <p>Your privacy is very important to us. Accordingly, we have developed this Policy in order for you to understand how we collect, use, communicate and disclose and make use of personal information. The following outlines our privacy policy.</p>
+            <ul>
+                <li>Before or at the time of collecting personal information, we will identify the purposes for which information is being collected.</li>
+                <li>We will collect and use of personal information solely with the objective of fulfilling those purposes specified by us and for other compatible purposes, unless we obtain the consent of the individual concerned or as required by law.		</li>
+                <li>We will only retain personal information as long as necessary for the fulfillment of those purposes. </li>
+                <li>We will collect personal information by lawful and fair means and, where appropriate, with the knowledge or consent of the individual concerned. </li>
+                <li>Personal data should be relevant to the purposes for which it is to be used, and, to the extent necessary for those purposes, should be accurate, complete, and up-to-date. </li>
+                <li>We will protect personal information by reasonable security safeguards against loss or theft, as well as unauthorized access, disclosure, copying, use or modification.</li>
+                <li>We will make readily available to customers information about our policies and practices relating to the management of personal information. </li>
+            </ul>
+            <p>We are committed to conducting our business in accordance with these principles in order to ensure that the confidentiality of personal information is protected and maintained. </p>
+            <p></p>
+        </div>
+    </div> 
+
+    <script type="text/javascript" src="/scripts/userSelectScript.js"></script>
+    <script type="text/javascript" src="/scripts/jquery.js"></script>
+    <script type="text/javascript" src="/scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/scripts/custom.js"></script>
+</body>
+</html>

@@ -1,0 +1,295 @@
+﻿@page
+@model MeetSpotOn.Pages.SignUpModel
+@{
+}
+
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
+
+<script type="text/javascript" src="https://sdk.monnify.com/plugin/monnify.js"></script>
+<div class="page-content header-clear-medium">
+
+    <div class="card card-style">
+        <div class="content">
+            @*<h1 class="font-40 font-800 pb-2">Spot<span class="gradient-highlight p-2 mx-1 color-white scale-box d-inline-block rounded-s border-0">On</span></h1>*@
+            <p class="font-600 color-highlight mb-n1">Let's start</p>
+            <h1 class="font-30">Sign In</h1>
+            <p>
+                Enter your credentials below to sign into your account.
+            </p>
+
+            <div class="input-style has-icon input-style-1 input-required">
+                <i class="input-icon fa fa-user"></i>
+                <span>Username</span>
+                <em>(required)</em>
+                <input type="name" id="LoginName" placeholder="Login Name">
+            </div>
+            <div class="input-style has-icon input-style-1 input-required">
+                <i class="input-icon fa fa-lock"></i>
+                <span>Password</span>
+                <em>(required)</em>
+                <input type="password" id="Password" placeholder="Password">
+            </div>
+
+            <div class="row mb-5 hidden" id="item-preloader">
+                <div class="col-12">
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-border color-blue-dark" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="javascript:authenticate();" id="btnIOS" class="show-ios btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s">Sign In</a>
+            <a href="javascript:authenticate();" id="btnANDROID" class="show-android btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s">Sign In</a>
+
+            <div class="row pt-3 mb-3">
+                <div class="col-6 text-left">
+                    <a href="/forgot" class="color-highlight">Forgot Password?</a>
+                </div>
+                <div class="col-6 text-right">
+                    <a href="/register" class="color-highlight">Create Account</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+<div id="snackbar-9" class="snackbar-toast color-white bg-highlight color-white" data-autohide="true"><i class="fa fa-sync fa-spin mr-3"></i>Processing...</div>
+
+<div id="snackbar-19" class="snackbar-toast color-white bg-blue-dark" data-autohide="false">
+    <h1 class="color-white font-20 pt-3 pb-3 mb-n4">Loading...</h1>
+    <p class="color-white mb-0 pb-1">This won't take long...</p>
+</div>
+<div id="snackbar-10" class="snackbar-toast color-white bg-red-dark" data-delay="6000" data-autohide="true">
+    <h1 class="color-white font-20 pt-3 pb-3 mb-n4">Error</h1>
+    <p class="color-white mb-0 pb-1">We couldn't find your request...</p>
+</div>
+
+<div id="menu-option-1"
+     class="menu menu-box-modal rounded-m"
+     data-menu-height="250"
+     data-menu-width="350">
+    <div class="menu-title">
+        <i class="fa fa-question-circle scale-box float-left mr-3 ml-3 fa-3x mt-1 color-blue-dark"></i>
+        <p class="color-highlight">We need to know,</p>
+        <h1 class="font-20">Got a SpotOn Code?</h1>
+        <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+    </div>
+    <div class="content mt-0">
+        <p class="pr-3">
+            We sent you a confirmation code. Please check your email and confirm before proceeding to the next step.
+        </p>
+        <div class="row mb-0">
+            <div class="col-6">
+                <a href="javascript:#setUserNewAllFalse();" class="close-menu btn btn-full btn-m bg-red-dark font-600 rounded-s">No, I Don't</a>
+            </div>
+            <div class="col-6">
+                <a href="#" data-menu="menu-age" class="btn btn-full btn-m bg-green-dark font-600 rounded-s">Yes, I Have!</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="menu-age"
+     class="menu menu-box-modal rounded-m"
+     data-menu-height="250"
+     data-menu-width="350">
+    <div class="mr-3 ml-3 mt-3 pt-1">
+        <h3 class="Verify font-700 mb-0">Verify SpotOn Code</h3>
+        <p class="font-11 mb-3">
+            Enter the Spot-On Code. The system will do the rest.
+        </p>
+
+        <div class="row mb-0">
+            <div class="col-1">
+
+            </div>
+            <div class="col-10">
+                <div class="input-style input-style-1 input-required">
+                    <span>Spot-On Code</span>
+                    <input maxlength="6" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" style="padding:7px 4px 4px 4px; letter-spacing:10px; text-align:center" id="spot-on-code" type="text" placeholder="Enter Code Here">
+                </div>
+            </div>
+            <div class="col-1">
+
+            </div>
+        </div>
+        <a href="javascript:checkCode();" class="btn btn-full btn-m shadow-l rounded-s bg-blue-dark mt-3 text-uppercase font-600">Verify Code</a>
+    </div>
+</div>
+
+<div id="menu-code-okay"
+     class="menu menu-box-modal rounded-m"
+     data-menu-height="300"
+     data-menu-width="350">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-check-circle color-green-dark"></i></h1>
+    <h1 class="text-center text-uppercase font-900">Code Verified</h1>
+    <p class="boxed-text-l mt-2 mb-3 pb-3">
+        Thank you for code verification.<br> You can now continue.
+    </p>
+    <a href="/complete" class="btn btn-m btn-center-m button-s shadow-l rounded-s font-600 bg-green-light">Great</a>
+</div>
+
+<div id="menu-code-okay"
+     class="menu menu-box-modal rounded-m"
+     data-menu-height="300"
+     data-menu-width="350">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-check-circle color-green-dark"></i></h1>
+    <h1 class="text-center text-uppercase font-900">Code Verified</h1>
+    <p class="boxed-text-l mt-2 mb-3 pb-3">
+        Thank you for code verification.<br> You can now continue.
+    </p>
+    <a href="/complete" class="btn btn-m btn-center-m button-s shadow-l rounded-s font-600 bg-green-light">Great</a>
+</div>
+
+<div id="menu-code-fail"
+     class="menu menu-box-modal rounded-m"
+     data-menu-height="300"
+     data-menu-width="350">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-check-circle color-red-dark"></i></h1>
+    <h1 class="text-center text-uppercase font-900">Invalid Code</h1>
+    <p class="boxed-text-l mt-2 mb-3 pb-3">
+        Thank you for code verification.<br> You can now continue.
+    </p>
+    <a href="#" class="close-menu btn btn-m btn-center-m button-s shadow-l rounded-s font-600 bg-red-light">Sorry</a>
+</div>
+
+
+<div id="menu-warning-2"
+     class="menu menu-box-modal bg-red-dark rounded-m"
+     data-menu-height="310"
+     data-menu-width="350">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-times-circle scale-box color-white shadow-xl rounded-circle"></i></h1>
+    <h1 class="text-center mt-3 text-uppercase color-white font-700">Wooops!</h1>
+    <p class="boxed-text-l color-white opacity-70" id="msg">
+
+    </p>
+    <a href="#" class="close-menu btn btn-m btn-center-l button-s shadow-l rounded-s text-uppercase font-600 bg-white color-black">Hmmm, Check again?</a>
+</div>
+
+<div id="menu-payment-expired" class="menu menu-box-bottom rounded-m"
+     data-menu-height="330"
+     data-menu-effect="menu-over">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-info-circle scale-box color-blue-dark shadow-xl rounded-circle"></i></h1>
+    <h3 class="text-center mt-3 font-700">Subscription Expired!</h3>
+    <p class="boxed-text-xl opacity-70">
+        Your subscription has expired.<br> Would you like to renew now? .
+    </p>
+    <div class="row mb-0 mr-3 ml-3">
+        <div class="col-6">
+            <a href="#" class="btn close-menu btn-full btn-m color-red-dark border-red-dark font-600 rounded-s">No, cancel</a>
+        </div>
+        <div class="col-6">
+            <a href="javascript:payWithMonnify();" class="btn btn-full btn-m color-green-dark border-green-dark font-600 rounded-s">Yes, continue!</a>
+        </div>
+    </div>
+</div>
+
+<div id="menu-cancel-payment"
+     class="menu menu-box-modal rounded-m"
+     data-menu-height="200"
+     data-menu-width="350">
+    <div class="menu-title">
+        <i class="fa fa-question-circle scale-box float-left mr-3 ml-3 fa-3x mt-1 color-blue-dark"></i>
+        <p class="color-highlight">Payment</p>
+        <h1 class="font-20">Process Canceled</h1>
+        <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+    </div>
+    <div class="content mt-0">
+        <p class="pr-3">
+            You canceled the payment process! No subscription was made.
+        </p>
+        <div class="row mb-0">
+            <div class="col-6">
+
+            </div>
+            <div class="col-6">
+                <a href="#" class="btn close-menu btn-full btn-m bg-green-dark font-600 rounded-s">Ok!</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="menu-success-2" class="menu menu-box-bottom bg-green-dark rounded-m"
+     data-menu-height="335"
+     data-menu-effect="menu-over">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-check-circle scale-box color-white shadow-xl rounded-circle"></i></h1>
+    <h1 class="text-center mt-3 font-700 color-white">All's Good</h1>
+    <p class="boxed-text-l color-white opacity-70">
+        Your subscription was successful.<br> You can continue with your previous actions.
+    </p>
+    <a href="/artisan" class="btn btn-m btn-center-m button-s shadow-l rounded-s text-uppercase font-600 bg-white color-black">Great, Thanks!</a>
+</div>
+<div id="menu-warning-1" class="menu menu-box-bottom rounded-m"
+     data-menu-height="185"
+     data-menu-effect="menu-over">
+    <div class="menu-title">
+        <i class="fa fa-times-circle float-left mr-3 scale-box ml-3 fa-4x color-red-dark"></i>
+        <p class="color-highlight">The update has</p>
+        <h1>Failed</h1>
+        <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+    </div>
+    <div class="content mt-0 mb-0">
+        <p class="pr-3">
+            Payment was successful but the update task on your payment has failed. Please contact us using our contact details.
+    </div>
+</div>
+<div id="pack_menu_list"
+     class="menu menu-box-bottom rounded-m"
+     data-menu-height="425" data-menu-effect="menu-over">
+    <div class="menu-title">
+        <p class="color-highlight">Tap a link to</p>
+        <h1>Share</h1>
+        <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+    </div>
+    <div class="divider divider-margins mt-3 mb-0"></div>
+    <div class="content mt-0">
+        <div class="list-group list-custom-small">
+            <a href="#">
+                <i class="fab fa-facebook-f font-12 bg-facebook color-white shadow-l rounded-l"></i>
+                <span>Artisans</span>
+                <i class="fa fa-angle-right mr-2"></i>
+            </a>
+            <a href="#">
+                <i class="fab fa-twitter font-12 bg-twitter color-white shadow-l rounded-l"></i>
+                <span>Twitter</span>
+                <i class="fa fa-angle-right mr-2"></i>
+            </a>
+            <a href="#">
+                <i class="fab fa-linkedin-in font-12 bg-linkedin color-white shadow-l rounded-l"></i>
+                <span>LinkedIn</span>
+                <i class="fa fa-angle-right mr-2"></i>
+            </a>
+            <a href="#">
+                <i class="fab fa-whatsapp font-12 bg-whatsapp color-white shadow-l rounded-l"></i>
+                <span>WhatsApp</span>
+                <i class="fa fa-angle-right mr-2"></i>
+            </a>
+            <a href="#">
+                <i class="fa fa-envelope font-12 bg-mail color-white shadow-l rounded-l"></i>
+                <span>Email</span>
+                <i class="fa fa-angle-right mr-2"></i>
+            </a>
+            <a href="#" class="close-menu border-0">
+                <i class="fa fa-times font-12 bg-red-dark color-white shadow-l rounded-l"></i>
+                <span>Close</span>
+                <i class="fa fa-angle-right mr-2"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="~/scripts/UtilityScript.js"></script>
+<script type="text/javascript" src="js/SpotOnPaymentScript.js"></script>
+<script type="text/javascript" src="~/js/accountScript.js"></script>
+<script type="text/javascript" src="scripts/jquery.js"></script>
+<script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>

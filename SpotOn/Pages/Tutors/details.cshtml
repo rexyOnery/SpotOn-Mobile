@@ -1,0 +1,62 @@
+﻿@page
+@model MeetSpotOn.Pages.Tutors.detailsModel
+@{
+    //Layout = "~/Pages/Shared/_TutorLayout.cshtml";
+}
+
+<div class="page-content">
+
+    <div class="card card-style " data-card-height="40vh" id="bg_img">
+        <div class="card-top">
+            <a href="#" class="btn btn-s border-white color-white float-right mt-2 mr-2 rounded-sm" id="class_name"></a>
+        </div>
+        <div class="card-bottom ml-3 mr-3">
+            <h1 class="font-40 line-height-xl color-white"><span id="f_name">My</span><br><span id="l_name">Name</span></h1>
+            <p class="color-white opacity-60"><i class="fa fa-map-marker mr-2"></i><span id="dash_location">My Location</span></p>
+            <p class="color-white opacity-80 font-15" id="dash_description">
+               My profile here!
+            </p>
+            <div id="procreate" style="float:right" class="spinner-border mb-4 mr-4 color-green-dark" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <div class="card-overlay bg-gradient"></div>
+    </div>
+
+
+    <div class="card card-style">
+        <div class="content mb-2">
+            <h4>Tutor Subjects</h4>
+            <p>
+                Lists of all subjects offered by this tutor
+            </p>
+
+            <div class="list-group list-boxes" id="tutor_subjects_list">
+
+            </div>
+            <div id="tutor_subjects_list_error" class="list-boxes list-group hidden">
+            </div>
+            <div id="pro_subs" style="float:right" class="spinner-border mr-4 color-green-dark hidden" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!-- Page content ends here-->
+
+<script src="~/js/ParentScript.js"></script>
+
+
+<script type="text/javascript">
+    $('#foot-1').removeClass('circle-nav active-nav');
+    $('#foot-2').removeClass('circle-nav active-nav');
+    $('#foot-3').removeClass('circle-nav active-nav');
+    $('#foot-4').removeClass('circle-nav active-nav');
+    $('#foot-5').addClass('circle-nav active-nav');
+
+
+    getTutorDetailDashBoard();
+</script>
+

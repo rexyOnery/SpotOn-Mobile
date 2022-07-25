@@ -1,0 +1,262 @@
+﻿@page
+@model MeetSpotOn.Pages.SignUpModel
+@{
+}
+
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
+<div class="page-content header-clear-medium">
+
+    <div class="card card-style">
+        <div class="content">
+            <p class="font-600 color-highlight mb-n1">New Account</p>
+            <h1 class="font-30">Sign Up</h1>
+            <p>
+                Create an account!
+            </p>
+            <div class="divider-icon divider-margins bg-red-dark text-uppercase"><span class="mt-5">Login Details</span><i class="fa font-17 color-blue-dark fa-cog"></i></div>
+
+            <div class="input-style has-icon input-style-1 input-required">
+                <i class="input-icon fa fa-at"></i>
+                <span>Enter your Email</span>
+                <em>(required)</em>
+                <input type="email" id="email-address" placeholder="Enter your Email">
+            </div>
+
+            <div class="input-style has-icon input-style-1 input-required">
+                <i class="input-icon fa fa-lock"></i>
+                <span>Choose Password</span>
+                <em>(required)</em>
+                <input type="password" id="password" placeholder="Choose Password">
+            </div>
+
+            <div class="input-style has-icon input-style-1 input-required">
+                <i class="input-icon fa fa-lock"></i>
+                <span>Confirm Password</span>
+                <em>(required)</em>
+                <input type="password" id="cnfpassword" placeholder="Confirm Choosen Password">
+            </div>
+
+            <br />
+            <div class="divider-icon divider-margins bg-red-dark text-uppercase">User Information<i class="fa font-17 color-blue-dark fa-cog"></i></div>
+            <div class="input-style has-icon input-style-1 input-required">
+                <i class="input-icon fa fa-user"></i>
+                <span>First Name</span>
+                <em>(required)</em>
+                <input type="text" id="first-name" placeholder="Enter your first name">
+            </div>
+            <div class="input-style has-icon input-style-1 input-required">
+                <i class="input-icon fa fa-user"></i>
+                <span>Last Name</span>
+                <em>(required)</em>
+                <input type="text" id="last-name" placeholder="Enter your last name">
+            </div>
+
+            <div class="input-style input-style-2 input-required">
+                <span>State</span>
+                <em><i class="fa fa-angle-down"></i></em>
+                <select class="form-control" id="state" onchange="getLocalAreas()">
+                </select>
+            </div>
+
+            <div class="input-style input-style-2 input-required">
+                <span>Local Government Area</span>
+                <em><i class="fa fa-angle-down"></i></em>
+                <select class="form-control" id="lga">
+                </select>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <div id="procreate" class="spinner-border color-green-dark hidden" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            <a id="artIOSUser" href="javascript: addItem();" class="show-ios btn btn-border pull-right btn-m btn-full mb-3 mt-4 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Create Account</a>
+            <a id="artAndroidUser" href="javascript: addItem();" class="show-android btn btn-border pull-right btn-m btn-full mt-4 mb-3 rounded-xl text-uppercase font-900 border-blue-dark color-blue-dark bg-theme">Create Account</a>
+
+            @*<a id="btnAddAcct" href="javascript:addItem();" class="btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s">Create Account</a>*@
+
+            <a href="#" id="btnShowPath" data-menu="menu-option-1" class="chip chip-s bg-dark-dark hidden pull-right">
+                <i class="fa fa-check color-white bg-green-dark"></i>
+                <span class="color-white">All good. Proceed</span>
+            </a>
+
+
+            <div class="row pt-3 mb-3">
+                <div class="col-6 text-left">
+                    <a href="/forgot">Forgot Password?</a>
+                </div>
+                <div class="col-6 text-right">
+                    <a href="/login">Sign In Here</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!-- Page content ends here-->
+<div id="toast-1" class="toast toast-tiny toast-top bg-blue-dark"><i class="fa fa-sync fa-spin mr-3"></i>Processing...</div>
+
+<div id="snackbar-5" class="snackbar-toast color-white bg-red-dark" data-delay="5000" data-autohide="true"><i class="fa fa-times mr-3"></i>Error Occured</div>
+
+
+
+<div id="snackbar-3" class="snackbar-toast color-white bg-yellow-dark" data-delay="5000" data-autohide="true"><i class="fa fa-info mr-3"></i><span id="msg">Something's wrong! All fields are required.</span></div>
+
+<div id="menu-warning-2" class="menu menu-box-bottom rounded-m"
+     data-menu-height="185"
+     data-menu-effect="menu-over">
+    <div class="menu-title">
+        <i class="fa fa-times-circle float-left mr-3 scale-box ml-3 fa-4x color-red-dark"></i>
+        <p class="color-highlight">The task has</p>
+        <h1>Failed</h1>
+        <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+    </div>
+    <div class="content mt-0 mb-0">
+        <p class="pr-3">
+            There was an error. Please try again.
+        </p>
+    </div>
+</div>
+
+<div id="menu-option-1"
+     class="menu menu-box-modal rounded-m"
+     data-menu-height="200"
+     data-menu-width="350">
+    <div class="menu-title">
+        <i class="fa fa-question-circle scale-box float-left mr-3 ml-3 fa-3x mt-1 color-blue-dark"></i>
+        <p class="color-highlight">We need to know,</p>
+        <h1 class="font-20">Folio/Registration Number</h1>
+        <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+    </div>
+    <div class="content mt-0">
+        <p class="pr-3">
+            Would you like to provide these numbers for verification?
+        </p>
+        <div class="row mb-0">
+            <div class="col-6">
+                <a href="javascript:setRegisterUserNewAllFalse();" class="btn btn-full btn-m bg-red-dark font-600 rounded-s">No, I Don't</a>
+            </div>
+            <div class="col-6">
+                <a href="#" data-menu="menu-age" class="btn btn-full btn-m bg-green-dark font-600 rounded-s">Yes, I Do!</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="menu-age"
+     class="menu menu-box-modal rounded-m"
+     data-menu-height="250"
+     data-menu-width="350">
+    <div class="mr-3 ml-3 mt-3 pt-1">
+        <h3 class="Verify font-700 mb-0">Folio Number</h3>
+        <p class="font-11 mb-3">
+            Enter the Folio Number.
+        </p>
+
+        <div class="row mb-0">
+            <div class="col-3">
+
+            </div>
+            <div class="col-6">
+                <div class="input-style input-style-1 input-required">
+                    <span>Folio Number</span>
+                    <input id="spot-on-folio" type="number" placeholder="Enter Folio Number">
+                </div>
+            </div>
+            <div class="col-3">
+
+            </div>
+            
+        </div>
+        <a href="#" data-menu="menu-registration" class="btn btn-full btn-m shadow-l rounded-s bg-blue-dark mt-3 text-uppercase font-600">Next</a>
+    </div>
+</div>
+<div id="menu-registration"
+     class="menu menu-box-modal rounded-m"
+     data-menu-height="250"
+     data-menu-width="350">
+    <div class="mr-3 ml-3 mt-3 pt-1">
+        <h3 class="Verify font-700 mb-0">Registration Number</h3>
+        <p class="font-11 mb-3">
+            Enter your Registration Number.
+        </p>
+
+        <div class="row mb-0">
+
+            <div class="col-3">
+
+            </div>
+            <div class="col-6">
+                <div class="input-style input-style-1 input-required">
+                    <span>Registration Number</span>
+                    <input id="spot-on-reg" type="number" placeholder="Enter Registration Number">
+                </div>
+            </div>
+            <div class="col-3">
+
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div id="procsend" class="spinner-border color-green-dark hidden" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <a id="veriSend" href="javascript:veriDoc();" class="btn btn-full btn-m shadow-l rounded-s bg-blue-dark mt-3 text-uppercase font-600">Send</a>
+    </div>
+</div>
+
+<div id="menu-code-okay"
+     class="menu menu-box-modal rounded-m"
+     data-menu-height="300"
+     data-menu-width="350">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-check-circle color-green-dark"></i></h1>
+    <h1 class="text-center text-uppercase font-900">Code Verified</h1>
+    <p class="boxed-text-l mt-2 mb-3 pb-3">
+        Thank you for providing the verification information.<br> You can now continue.
+    </p>
+    <a href="/complete" class="btn btn-m btn-center-m button-s shadow-l rounded-s font-600 bg-green-light">Great</a>
+</div>
+
+<div id="menu-code-fail"
+     class="menu menu-box-modal rounded-m"
+     data-menu-height="300"
+     data-menu-width="350">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-check-circle color-red-dark"></i></h1>
+    <h1 class="text-center text-uppercase font-900">Error!</h1>
+    <p class="boxed-text-l mt-2 mb-3 pb-3">
+        Something went wrong.<br> You can try agian.
+    </p>
+    <a href="#" data-menu="menu-age" class="close-menu btn btn-m btn-center-m button-s shadow-l rounded-s font-600 bg-red-light">Try Again</a>
+</div>
+<!---------------->
+<!---------------->
+<!--Menu Warning-->
+<!---------------->
+<!---------------->
+<div id="menu-warning-1" class="menu menu-box-bottom rounded-m"
+     data-menu-height="185"
+     data-menu-effect="menu-over">
+    <div class="menu-title">
+        <i class="fa fa-times-circle float-left mr-3 scale-box ml-3 fa-4x color-red-dark"></i>
+        <p class="color-highlight">The task has</p>
+        <h1>Failed</h1>
+        <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+    </div>
+    <div class="content mt-0 mb-0">
+        <p class="pr-3">
+            The username you selected is already taken.
+        </p>
+    </div>
+</div>
+
+<script type="text/javascript" src="js/site.js"></script>
+<script type="text/javascript" src="js/LocationScript.js"></script>
+<script type="text/javascript">
+    getStates();
+</script>

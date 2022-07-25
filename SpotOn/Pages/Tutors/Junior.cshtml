@@ -1,0 +1,304 @@
+﻿@page
+@model SpotOn.Pages.Tutors.JuniorModel
+@{
+}
+
+
+<div class="page-content">
+
+    <div class="task-slider owl-carousel owl-no-dots">
+        <a href="/tutors">
+            <div data-card-height="170" class="card rounded-m shadow-l bg-pri">
+                <div class="card-bottom">
+                    <h4 class="color-white font-15 mb-3 ml-3">Primary <br> School</h4>
+                </div>
+                <div class="card-overlay bg-gradient"></div>
+            </div>
+        </a>
+        <a href="#">
+            <div data-card-height="170" class="card rounded-m shadow-l bg-jun">
+                <div class="card-bottom">
+                    <h4 class="color-white font-15 mb-3 ml-3">Junior <br> Secondary</h4>
+                </div>
+                <div class="card-overlay bg-gradient"></div>
+            </div>
+        </a>
+        <a href="/tutors/senior">
+            <div data-card-height="170" class="card rounded-m shadow-l bg-sen">
+                <div class="card-bottom">
+                    <h4 class="color-white font-15 mb-3 ml-3">Senior <br> Secondary</h4>
+                </div>
+                <div class="card-overlay bg-gradient"></div>
+            </div>
+        </a>
+        <a href="/tutors/exams">
+            <div data-card-height="170" class="card rounded-m shadow-l bg-wa">
+                <div class="card-bottom">
+                    <h4 class="color-white font-15 mb-3 ml-3">Exams <br>Tutors</h4>
+                </div>
+                <div class="card-overlay bg-gradient"></div>
+            </div>
+        </a> 
+    </div>
+
+
+    <div class="card card-style shadow-xl">
+        <div class="content">
+            <p class="color-highlight font-600 mb-n1">Search filter for</p>
+            <h1 class="font-24 font-700 mb-2">Junior Secondary School <i class="fa fa-filter mt-n2 font-30 color-yellow-dark float-right mr-2 scale-box"></i></h1>
+            <p class="mb-1">
+
+            </p>
+            <div class="accordion" id="accordion-m">
+                <div class="mb-0">
+                    <button class="btn accordion-btn border-0 color-theme" data-toggle="collapse" data-target="#collapsem">
+                        <i class="fa fa-filter color-red-dark mr-2"></i>
+                        <span class="color-highlight font-600 mb-n1">Narrow your search to a specific location. Click here to begin.</span>
+                        <i class="fa fa-plus font-10 accordion-icon"></i>
+                    </button>
+                    <div id="collapsem" class="collapse" data-parent="#accordion-1">
+                        <div class="accordion" id="accordion-1">
+                            <div class="mb-0">
+                                <button class="btn accordion-btn border-0 color-theme" data-toggle="collapse" data-target="#collapse1">
+                                    <i class="fa fa-map color-blue-dark mr-2"></i>
+                                    Filter By State
+                                    <i class="fa fa-chevron-down font-10 accordion-icon"></i>
+                                </button>
+                                <div id="collapse1" class="collapse" data-parent="#accordion-1">
+                                    <div class="input-style input-style-2 mb-3 pb-1">
+                                        <span class="input-style-1-active">State</span>
+                                        <em>(required)</em>
+                                        <select id="slc_state" onchange="javascript: SlcClassChange();">
+                                            <option value="">Select a State</option>
+                                            <option value="one">Primary One</option>
+                                            <option value="two">Primary Two</option>
+                                            <option value="three">Primary Three</option>
+                                            <option value="four">Primary Four</option>
+                                            <option value="five">Primary Five</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-1">
+                                <button class="btn accordion-btn border-0 color-theme" data-toggle="collapse" data-target="#collapse2">
+                                    <i class="fa fa-map-marker color-blue-dark mr-2"></i>
+                                    Filter By Local Government
+                                    <i class="fa fa-chevron-down font-10 accordion-icon"></i>
+                                </button>
+                                <div id="collapse2" class="collapse" data-parent="#accordion-1">
+                                    <div class="input-style input-style-2 mb-3 pb-1">
+                                        <span class="input-style-1-active">Local Area</span>
+                                        <em>(required)</em>
+                                        <select id="slc_state">
+                                            <option value="">Select a Local Area</option>
+                                            <option value="one">Primary One</option>
+                                            <option value="two">Primary Two</option>
+                                            <option value="three">Primary Three</option>
+                                            <option value="four">Primary Four</option>
+                                            <option value="five">Primary Five</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <button class="btn accordion-btn border-0 color-theme" data-toggle="collapse" data-target="#collapse3">
+                                    <i class="fa fa-location-arrow color-blue-dark mr-2"></i>
+                                    Filter By Location
+                                    <i class="fa fa-chevron-down font-10 accordion-icon"></i>
+                                </button>
+                                <div id="collapse3" class="collapse" data-parent="#accordion-1">
+                                    <div class="input-style input-style-2 mb-3 pb-1">
+                                        <span class="input-style-1-active">Location</span>
+                                        <em>(required)</em>
+                                        <select id="slc_location">
+                                            <option value="">Select a Location</option>
+                                            <option value="one">Primary One</option>
+                                            <option value="two">Primary Two</option>
+                                            <option value="three">Primary Three</option>
+                                            <option value="four">Primary Four</option>
+                                            <option value="five">Primary Five</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <button class="btn accordion-btn border-0 color-theme" data-toggle="collapse" data-target="#collapse4">
+                                    <i class="fa fa-book color-blue-dark mr-2"></i>
+                                    Subject
+                                    <i class="fa fa-chevron-down font-10 accordion-icon"></i>
+                                </button>
+                                <div id="collapse4" class="collapse" data-parent="#accordion-1">
+                                    <div class="input-style input-style-2 mb-3 pb-1">
+                                        <span class="input-style-1-active">Subject(s)</span>
+                                        <em>(required)</em>
+                                        <textarea class="form-control" maxlength="120" placeholder="Enter subject(s) seperated by comma e.g Mathematics, English etc. Spelling matters"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="javascript: SlcLocationChange();" class="btn btn-xxs mb-3 rounded-s text-uppercase font-900 shadow-s bg-highlight float-right">Filter Tutors </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="card card-full-left card-style">
+            <div class="content" id="docItems">
+                <div class='d-flex'>
+                    <div class='mr-3'>
+                        <img width='120' class='fluid-img rounded-m shadow-xl' src='images/pictures/31l.jpg'>
+                    </div>
+                    <div>
+                        <p class='color-highlight font-600 mb-n1'>Mr.</p>
+                        <h2>Bamidele Alabi</h2>
+                        <p class='mt-2'>
+                            Teaches: components that are just as easy as copy and paste.
+                        </p>
+                        <a href='/tutors/details' class='btn btn-sm rounded-s font-13 font-600 gradient-highlight'>View Detail</a>
+                    </div>
+                </div>
+                <div class='divider mt-4'></div>
+
+            </div>
+        </div>
+
+        <div class="card card-full-left card-style">
+            <div class="content" id="docItems">
+
+                <div id="no-item" class="card card-style bg-yellow-dark alert hidden" data-menu="menu-prescription-1" role="button">
+                    <div class="d-flex py-2">
+                        <div>
+                            <i class="fa fa-exclamation-circle mr-3 scale-box fa-4x color-white"></i>
+                        </div>
+                        <div>
+                            <p class="color-highlight mb-n1 font-12 font-600">Empty</p>
+                            <h1 class="mb-0">No tutor found!</h1>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row mb-5" id="item-preloader">
+            <div class="col-12">
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border color-blue-dark" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav aria-label="pagination-demo">
+            <ul class="pagination pagination-justify-content-center" id="page-items">
+            </ul>
+        </nav>
+
+
+    </div>
+</div>
+
+
+<div id="menu-option-2" class="menu menu-box-bottom rounded-m"
+     data-menu-height="330"
+     data-menu-effect="menu-over">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-info-circle scale-box color-blue-dark shadow-xl rounded-circle"></i></h1>
+    <h3 class="text-center mt-3 font-700">No Result?</h3>
+    <p class="boxed-text-xl opacity-70">
+        Your search returns no result.<br> Do you want to advertise this position?<br />It's free!.
+    </p>
+    <div class="row mb-0 mr-3 ml-3">
+        <div class="col-6">
+            <a href="#" class="btn close-menu btn-full btn-m color-red-dark border-red-dark font-600 rounded-s">No, cancel</a>
+        </div>
+        <div class="col-6">
+            <a href="javascript:advertise();" class="btn btn-full btn-m color-green-dark border-green-dark font-600 rounded-s">Yes, Advertie!</a>
+        </div>
+    </div>
+</div>
+
+<div id="success_menu"
+     class="menu menu-box-modal rounded-m"
+     data-menu-hide="1000"
+     data-menu-width="220"
+     data-menu-height="160">
+    <h1 class="text-center fa-5x mt-2 pt-3 pb-2"><i class="fa fa-check-circle color-green-dark"></i></h1>
+    <h2 class="text-center">Success</h2>
+</div>
+<div id="error_menu"
+     class="menu menu-box-modal rounded-m"
+     data-menu-hide="1000"
+     data-menu-width="220"
+     data-menu-height="160">
+    <h1 class="text-center fa-5x mt-2 pt-3 pb-2"><i class="fa fa-times-circle color-red-dark"></i></h1>
+    <h2 class="text-center">Task Failed</h2>
+</div>
+
+
+<!-- Menu Trial-->
+<div id="menu_login"
+     class="menu menu-box-modal rounded-m"
+     data-menu-height="590"
+     @*data-auto-activate="3"*@
+     data-menu-width="350">
+    <div class="content">
+        <p class="mb-n1 color-highlight font-600">Spot-On Access</p>
+        <h1>Access your Spot-On Packages </h1>
+        <p>
+            Start accessing your Spot-On Packages today and enjoy the awesome perks you get with any subscription! You'll love it!
+        </p>
+
+        <h5 class="mt-3"><i class="fa fa-check color-green-dark pr-2"></i> Full Access</h5>
+        <h5 class="mt-3"><i class="fa fa-check color-green-dark pr-2"></i> Quality Health Care</h5>
+        <h5 class="mt-3"><i class="fa fa-check color-green-dark pr-2"></i> Articulated Artisans</h5>
+        <h5 class="mt-3"><i class="fa fa-check color-green-dark pr-2"></i> Tasty Chefs</h5>
+        <h5 class="mt-3"><i class="fa fa-check color-green-dark pr-2"></i> Awesome Products</h5>
+        <h5 class="mt-3"><i class="fa fa-check color-green-dark pr-2"></i> Knowledgeable Tutors</h5>
+        <h5 class="mt-3"><i class="fa fa-check color-green-dark pr-2"></i> Spot-On Taxis</h5>
+
+
+        <div class="row mb-0 mt-4 pt-1">
+            <div class="col-6">
+                <a href="#" class="close-menu btn btn-full rounded-s btn-border color-highlight border-highlight btn-m font-600">No, thanks!</a>
+            </div>
+            <div class="col-6">
+                <a href="/login" class="btn btn-full rounded-s gradient-highlight btn-m font-600 scale-box border-0">Start</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="menu-payment-expired" class="menu menu-box-bottom rounded-m"
+     data-menu-height="330"
+     data-menu-effect="menu-over">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-info-circle scale-box color-blue-dark shadow-xl rounded-circle"></i></h1>
+    <h3 class="text-center mt-3 font-700">Subscription Expired!</h3>
+    <p class="boxed-text-xl opacity-70">
+        Your subscription has expired.<br> Would you like to renew now? .
+    </p>
+    <div class="row mb-0 mr-3 ml-3">
+        <div class="col-6">
+            <a href="#" class="btn close-menu btn-full btn-m color-red-dark border-red-dark font-600 rounded-s">No, cancel</a>
+        </div>
+        <div class="col-6">
+            <a href="/payment/subscriptions" class="btn btn-full btn-m color-green-dark border-green-dark font-600 rounded-s">Yes, continue!</a>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/tutorScript.js"></script>
+
+<script type="text/javascript">
+    $('#foot-1').removeClass('circle-nav active-nav');
+    $('#foot-2').removeClass('circle-nav active-nav');
+    $('#foot-3').removeClass('circle-nav active-nav');
+    $('#foot-4').removeClass('circle-nav active-nav');
+    $('#foot-5').addClass('circle-nav active-nav');
+
+    getAllTutorItems();
+    getTutorItems(2);
+
+</script>

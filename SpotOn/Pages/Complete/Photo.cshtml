@@ -1,0 +1,118 @@
+﻿@page
+@model MeetSpotOn.Pages.Complete.PhotoModel
+@{
+}
+
+<div class="page-content">
+
+
+    <div class="card card-style">
+        <div class="content">
+            <p>
+                Upload an image/photo of yourself. @*This gives confidence to patients that they are talking with a real doctor.*@
+            </p>
+        </div>
+    </div>
+    <div class="card card-style">
+        <div class="content mb-0">
+            <p class="mb-n1 color-highlight font-600">Select your Image and</p>
+            <h1>Upload Here</h1>
+            <p>
+
+            </p>
+            <div class="file-data">
+                <input id="fileinput" type="file" class="upload-file bg-highlight shadow-s rounded-s " accept="image/*">
+                <p id="up" class="upload-file-text color-white">Upload Image</p>
+
+                <div class="d-flex justify-content-center">
+                    <div id="procdiv" class="spinner-border color-green-dark hidden" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+
+                <img src="/images/empty.png">
+            </div>
+            <div class="list-group list-custom-large upload-file-data disabled">
+                <a href="#" class="border-0">
+                    <i class="fa font-14 fa-info-circle color-gray-dark"></i>
+                    <span>File Name</span>
+                    <strong class="upload-file-name">JS Populated</strong>
+                </a>
+                <a href="#" class="border-0">
+                    <i class="fa font-14 fa-weight-hanging color-gray-dark"></i>
+                    <span>File Size</span>
+                    <strong class="upload-file-size">JS Populated</strong>
+                </a>
+                <a href="#" class="border-0">
+                    <i class="fa font-14 fa-tag color-gray-dark"></i>
+                    <span>File Type</span>
+                    <strong class="upload-file-type">JS Populated</strong>
+                </a>
+                <a href="#" class="border-0 pb-4">
+                    <i class="fa font-14 fa-clock color-gray-dark"></i>
+                    <span>Modified Date</span>
+                    <strong class="upload-file-modified">JS Populated</strong>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    @*<div data-menu-load="/menu-footer.html"></div>*@
+</div>
+<!-- Page content ends here-->
+
+<div id="snackbar-9" class="snackbar-toast color-white bg-highlight color-white"><i class="fa fa-sync fa-spin mr-3"></i>Processing...</div>
+
+<div id="menu-warning-1" class="menu menu-box-bottom rounded-m"
+     data-menu-height="185"
+     data-menu-effect="menu-over">
+    <div class="menu-title">
+        <i class="fa fa-times-circle float-left mr-3 scale-box ml-3 fa-4x color-red-dark"></i>
+        <p class="color-highlight">The task has</p>
+        <h1>Failed</h1>
+        <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+    </div>
+    <div class="content mt-0 mb-0">
+        <p class="pr-3">
+            Error: Please Upload image of type .jpg, .jpeg, .png.
+        </p>
+    </div>
+</div>
+
+
+<!-- Quiz 1 -->
+<div id="quiz-1"
+     class="menu menu-box-modal rounded-0"
+     data-menu-width="101%"
+     data-menu-height="101%">
+     
+    <div class="card-center">
+        <div class="content">
+            <h1 class="font-36">Spot-On</h1>
+            <p class="mt-n2 color-highlight font-600 font-12">Health</p>
+            <p>
+                Thank you for registering with spot-on health.<br><br>
+                <strong class="color-theme font-10 font-500">We shall be verifying your details for authenticity and acceptance into our system.</strong>
+            </p>
+            <a href="/index" class="btn btn-m font-600 gradient-blue">Close</a>
+        </div>
+    </div>
+</div>
+<div id="menu-warning-file-upload"
+     class="menu menu-box-modal rounded-m"
+     data-menu-height="140"
+     data-menu-width="350">
+    <div class="menu-title">
+        <i class="fa fa-times-circle float-left mr-3 scale-box ml-3 fa-4x color-red-dark"></i>
+        <p class="color-highlight">The task has</p>
+        <h1>Failed</h1>
+        <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+    </div>
+    <div class="content mb-0 mt-0">
+        <p class="pr-3">
+            The file upload task has failed. Please try uploading the file again.
+        </p>
+    </div>
+</div>
+<script type="text/javascript" src="~/js/fileScript.js"></script>

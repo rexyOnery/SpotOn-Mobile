@@ -1,0 +1,140 @@
+﻿@page
+@model MeetSpotOn.Pages.Tutors.TutorDashModel
+@{
+    //Layout = "~/Pages/Shared/_TutorLayout.cshtml";
+}
+
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
+<div class="page-content">
+
+    <div class="card card-style">
+        <div class="mb-4">
+            <div class="divider mb-4"></div>
+            <div class="d-flex content mt-0 mb-1">
+                <!-- right side of profile. increase image width to increase column size-->
+                <div>
+                    <img id="my_img" src="/images/empty.png" data-src="/images/pictures/6t.jpg" width="85" class="rounded-circle mr-3 shadow-xl preload-img">
+                </div>
+                <!-- left side of profile -->
+                <div class="flex-grow-1">
+                    <h2><span id="dash_active"></span><i id="color_active" class="fa fa-check-circle font-16 ml-3"></i></h2>
+                    <a href="/chat/" class="mt-3 btn btn-xs font-600 btn-border border-highlight color-highlight">Message</a>
+                    <a href="#" data-menu="menu-follow" class="mt-3 ml-2 btn btn-xs font-600 btn-border border-highlight color-highlight">
+                        <i class="fa fa-user"></i><i class="ml-2 font-11 fa fa-check"></i>
+                    </a>
+                </div>
+            </div>
+            <div id="procreate" style="float:right" class="spinner-border mr-4 color-green-dark" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div class="content">
+                <h6 id="dash_name"></h6>
+                <h6 id="class_name">Class Category: <span></span></h6>
+                <p class="mb-n3" id="dash_profile"></p><br>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-style">
+        <div class="content mb-2">
+            <h4>My Subjects</h4>
+            <p>
+                Lists of all subjects that parents will reach you for. Click here to <a href="/tutors/moresubject">add more subjects</a>
+            </p>
+            <div class='divider mb-3'></div>
+            <div class="list-group list-boxes hidden" id="tutor_subjects_list">
+                No Subject(s)! Seems like you have not entered yours subject(s).
+            </div>
+            <div id="tutor_subjects_list_error" class="list-boxes list-group hidden">
+                <a href="javascript: getTutorSubjects();">Reload my subjects</a>. There was a Network Error!
+            </div>
+            <div id="pro_subs" style="float:right" class="spinner-border mr-4 color-green-dark hidden" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-style">
+        <div class="content">
+            <p class="color-highlight font-600 mb-n1">Parents placed these</p>
+            <h1>Advert List</h1>
+            <p class="mb-2">
+                These are lists of subjects parents are seeking tutors for.
+                <br />
+                To get intouch with a seeker, simply tap the "Tap For Chat" text.
+            </p>
+            <div class='divider mb-3'></div>
+            <span id="tutor_advert_lists" style='visibility:visible'>
+
+            </span>
+
+
+            <div id="pro_ads" style="float:right" class="spinner-border mr-4 color-green-dark hidden" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div id="tutorDashBoard"></div>
+<!-- Follow Menu -->
+<div id="menu-follow"
+     class="menu menu-box-modal rounded-m"
+     data-menu-width="300"
+     data-menu-height="380">
+
+    <div class="text-center">
+        <img id="my_img2" src="/images/pictures/6t.jpg" width="150" class="mx-auto mt-4 rounded-circle">
+        <p class="text-center font-15 mt-4">Unfollow @@jane.louder84?</p>
+        <div class="divider mb-0"></div>
+        <a href="#" class="color-red-dark font-15 font-600 text-center py-3 d-block">Unfollow</a>
+        <div class="divider mb-0"></div>
+        <a href="#" class="close-menu color-theme font-15 text-center py-3 d-block">Cancel</a>
+    </div>
+</div>
+
+<div id="menu-option-2" class="menu menu-box-bottom rounded-m"
+     data-menu-height="330"
+     data-menu-effect="menu-over">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-info-circle scale-box color-blue-dark shadow-xl rounded-circle"></i></h1>
+    <h3 class="text-center mt-3 font-700">Are you sure?</h3>
+    <p class="boxed-text-xl opacity-70">
+        You can continue with your previous actions.<br> Easy to attach these to success calls.
+    </p>
+    <div class="row mb-0 mr-3 ml-3">
+        <div class="col-6">
+            <a href="#" class="btn close-menu btn-full btn-m color-red-dark border-red-dark font-600 rounded-s">No, cancel</a>
+        </div>
+        <div class="col-6">
+            <a href="javascript:callDeleteSubj();" class="btn btn-full btn-m color-green-dark border-green-dark font-600 rounded-s">Yes, continue!</a>
+        </div>
+    </div>
+</div>
+
+
+<div id="menu-warning-error"
+     class="menu menu-box-modal bg-red-dark rounded-m"
+     data-menu-height="310"
+     data-menu-width="355">
+    <h1 class="text-center mt-4"><i class="fa fa-3x fa-times-circle scale-box color-white shadow-xl rounded-circle"></i></h1>
+    <h1 class="text-center mt-3 text-uppercase color-white font-700"><span id="warning-title-error"></span></h1>
+    <p class="boxed-text-l color-white opacity-70">
+        <span id="warningTextError"></span>
+    </p>
+    <a href="#" class="close-menu btn btn-m btn-center-l button-s shadow-l rounded-s text-uppercase font-600 bg-white color-black">Close</a>
+</div>
+
+
+<script type="text/javascript" src="~/js/tutorScript.js"></script>
+<script type="text/javascript">
+    $('#foot-1').removeClass('circle-nav active-nav');
+    $('#foot-2').removeClass('circle-nav active-nav');
+    $('#foot-3').removeClass('circle-nav active-nav');
+    $('#foot-4').removeClass('circle-nav active-nav');
+    $('#foot-5').addClass('circle-nav active-nav');
+</script>

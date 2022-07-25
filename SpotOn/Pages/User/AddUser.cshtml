@@ -1,0 +1,101 @@
+﻿@page
+@model SpotOn.Pages.User.AddUserModel
+@{
+}
+
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
+
+<div class="page-content header-clear-medium">
+
+    <div class="card card-style">
+        <div class="content">
+            @*<h1 class="font-40 font-800 pb-2">Spot<span class="gradient-highlight p-2 mx-1 color-white scale-box d-inline-block rounded-s border-0">On</span></h1>*@
+            <p class="font-600 color-highlight mb-n1">Let's start</p>
+            <h1 class="font-30">User</h1>
+            <p>
+                Let's meet you'.
+            </p>
+             
+            <div class="input-style has-icon input-style-1 input-required">
+                <i class="input-icon fa fa-user"></i>
+                <span>First Name</span>
+                <em>(required)</em>
+                <input type="name" id="firstname" placeholder="First Name">
+            </div>
+            <div class="input-style has-icon input-style-1 input-required">
+                <i class="input-icon fa fa-user"></i>
+                <span>Last Name</span>
+                <em>(required)</em>
+                <input type="name" id="lastname" placeholder="Last Name">
+            </div>
+            <div class="input-style has-icon input-style-1 input-required">
+                <i class="input-icon fa fa-lock"></i>
+                <span>Phone</span>
+                <em>(required)</em>
+                <input type="number" maxlength="11" id="phone" placeholder="Phone">
+            </div>
+
+            <div class="input-style has-icon input-style-1 input-required">
+                <i class="input-icon"></i>
+                <span>State</span>
+                <select id="artisan_state" onchange="loadLocalAreas();">
+                    <option>
+                        <span>Loading States...</span>
+                    </option>
+                </select>
+            </div>
+            <div class="input-style has-icon input-style-1 input-required">
+                <i class="input-icon"></i>
+                <span>Local Govt. Area</span>
+                <select id="local_govt_area">
+                    <option>Local Govt. Area</option>
+                </select>
+            </div>
+            <div class="input-style has-icon input-style-1 input-required">
+                <i class="input-icon fa fa-lock"></i>
+                <span>Current Location</span>
+                <em>(required)</em>
+                <input type="name" id="location" placeholder="Your Location e.g Maitama">
+            </div>
+
+            <div class="row mb-5 hidden" id="item-preloader">
+                <div class="col-12">
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-border color-blue-dark" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="javascript:create_user();" class="show-ios btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s">Create User</a>
+            <a href="javascript:create_user();" class="show-android btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s">Create User</a>
+             
+        </div>
+    </div> 
+</div>
+
+<div id="menu-warning-2" class="menu menu-box-bottom rounded-m"
+     data-menu-height="185"
+     data-menu-effect="menu-over">
+    <div class="menu-title">
+        <i class="fa fa-times-circle float-left mr-3 scale-box ml-3 fa-4x color-red-dark"></i>
+        <p class="color-highlight">The task has</p>
+        <h1>Failed</h1>
+        <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+    </div>
+    <div class="content mt-0 mb-0">
+        <p class="pr-3" id="msg">
+
+        </p>
+    </div>
+</div>
+<script type="text/javascript">
+    if (localStorage.getItem("userid") == null)
+        location.href = "/login";
+</script>
+<script type="text/javascript" src="~/scripts/UtilityScript.js"></script>
+<script type="text/javascript" src="~/js/accountScript.js"></script>
