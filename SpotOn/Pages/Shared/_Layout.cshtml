@@ -39,14 +39,14 @@
             <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-light"><i class="fas fa-moon"></i></a>
         </div>
 
-        @*<div id="footer-bar" class="footer-bar-6">
-            <a id="foot-1"><i class="fa fa-box"></i><span>Artisan</span></a>
-            <a id="foot-2"><i class="fa fa-utensils"></i><span>Chef</span></a>
-            <a id="foot-3" class="circle-nav active-nav"><i class="fa fa-stethoscope"></i><span>Health</span></a>
-            <a id="foot-4"><i class="fa fa-shopping-cart"></i><span>Products</span></a>
-            <a id="foot-5"><i class="fa fa-chalkboard-teacher"></i><span>Tutors</span></a>
-            
-        </div>*@
+        <div id="footer-bar" class="footer-bar-6">
+            <a id="foot-1"><i class="fa fa-box"></i><span>Artisan</span></a> 
+            @*<a id="foot-2"><i class="fa fa-utensils"></i><span>Chef</span></a>
+        <a id="foot-3" class="circle-nav active-nav"><i class="fa fa-stethoscope"></i><span>Health</span></a>
+        <a id="foot-4"><i class="fa fa-shopping-cart"></i><span>Products</span></a>
+        <a id="foot-5"><i class="fa fa-chalkboard-teacher"></i><span>Tutors</span></a>*@
+
+        </div>
 
         <div class="page-title page-title-fixed">
             <h1>SpotOn @ViewData["Title"]</h1>
@@ -93,8 +93,10 @@
     <script type="text/javascript">
         var url = 'http://medicall-002-site5.ctempurl.com/api/UserSpotOns';
         function LogMeOut() {
-            $("#menu-signout-error").hideMenu();
-            signout();
+            //$("#menu-signout-error").hideMenu();
+            //signout();
+            localStorage.clear();
+            location.href = "/index";
         }
         var signout = async () => {
             try {
@@ -127,7 +129,7 @@
         $(document).ready(function () {
             'use strict'
 
-            if (localStorage.getItem('username') != null) {
+            if (localStorage.getItem('userid') != null) {
                 $("#faloggedout").removeClass('hidden');
                 $("#falogged").addClass('hidden');
             } else {
@@ -173,7 +175,7 @@
             $('#foot-1').on('click', function (e) {
                 e.preventDefault();
                 localStorage.setItem('_footer_', 'foot 1');
-                location.href = "/construction";
+                location.href = "/artisan";
             })
             $('#foot-2').on('click', function (e) {
                 e.preventDefault();

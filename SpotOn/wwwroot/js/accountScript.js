@@ -224,7 +224,13 @@ var authenticate = () => {
             }
 
         })
-        .catch(error => console.log('error', error));
+        .catch(error => {
+            $("#msg").html(result.message + "<br /> Please try again!.");
+            $("#menu-warning-2").showMenu();
+            $("#item-preloader").addClass('hidden');
+            document.getElementById("btnANDROID").style.pointerEvents = "auto";
+            document.getElementById("btnIOS").style.pointerEvents = "auto";
+        });
 }
 
 var getUser = (id) => {
@@ -572,4 +578,203 @@ var create_user = () => {
             $("#msg").html(error)
             $("#menu-warning-2").showMenu();
         });
+}
+
+_email = "";
+var sendInstructionCode = () => {
+    var email = document.getElementById('confirm-email-address').value.trim();
+    var answer = document.getElementById('answer').value.trim();
+    var question = document.getElementById('secretquestion').value.trim();
+    _email = email;
+    if (email == "") {
+        $("#menu-warning-2").showMenu();
+        return false;
+    }
+    if (answer == "") {
+        $("#menu-warning-2").showMenu();
+        return false;
+    }
+    $('#snackbar-9').toast('show');
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+        "UserName": email,
+        "Question": question,
+        "Answer": answer
+    });
+
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+    $("#load_spinner").removeClass('hidden');
+    $("#in_Code").addClass('hidden');
+    fetch(server_url + "/accounts/forgot-password", requestOptions)
+        .then(response => {
+            if (!response.ok) {
+                console.log('Network response was not ok');
+                $('#snackbar-9').toast('hide');
+                $("#menu-warning-2").showMenu();
+                $("#load_spinner").addClass('hidden');
+                $("#in_Code").removeClass('hidden');
+            } 
+            return response.json();
+        })
+        .then(data => {
+
+            console.log(data)
+            if (data.message == "false") {
+                $("#menu-warning-2").showMenu();
+                $("#load_spinner").addClass('hidden');
+                $("#in_Code").removeClass('hidden');               
+            } else {
+                $("#menu-instruction-code").showMenu();
+                $("#load_spinner").addClass('hidden');
+                $("#in_Code").removeClass('hidden');
+            }
+        })
+        //.then(result => uploadOk(result))
+        .catch(error => {
+            $('#snackbar-9').toast('hide');
+            $("#menu-warning-2").showMenu();
+            $("#load_spinner").addClass('hidden');
+            $("#in_Code").removeClass('hidden');
+        });
+
+
+}
+
+
+function validateInstructionCode() {
+    
+    var code = document.getElementById('instruction-code').value.trim();
+    if (_email == "" && code == "") {
+        $("#menu-warning-2").showMenu();
+    } else {
+        $('#snackbar-9').toast('show');
+
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            "Token": code
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        $("#load_instruction").removeClass('hidden');
+        $("#vCode").addClass('hidden');
+        fetch(server_url + "/accounts/validate-reset-token", requestOptions)
+            .then(response => {
+                if (!response.ok) {
+                    $("#menu-instruction-code").hideMenu();
+                    console.log('Network response was not ok');
+                    $('#snackbar-9').toast('hide');
+                    $("#menu-warning-1").showMenu();
+                } 
+                return response.json();
+            })
+            .then(result => { 
+                if (result.message == "Token is valid") {
+                    $("#menu-instruction-code").hideMenu();
+                    $("#menu-reset").showMenu();
+                    $("#load_instruction").addClass('hidden');
+                    $("#vCode").removeClass('hidden');
+                } else {
+                    $("#menu-instruction-code").hideMenu();
+                    $("#menu-warning-1").showMenu()
+                    $("#load_instruction").addClass('hidden');
+                    $("#vCode").removeClass('hidden');
+                }
+            })
+            .catch(error => {
+                $("#menu-instruction-code").hideMenu();
+                $("#menu-warning-1").showMenu()
+                $("#load_instruction").addClass('hidden');
+                $("#vCode").removeClass('hidden');
+            });
+
+
+    }
+}
+
+
+var changePassword = () => {
+    $("#change_msg").addClass('hidden');
+    var newpass = document.getElementById('new-password').value.trim();
+    var cnfpass = document.getElementById('cnf-password').value.trim();
+    var code = document.getElementById('instruction-code').value.trim();
+
+    if (newpass == "" || cnfpass == "") {
+        $("#change_msg").html("All fields are required!");
+        $("#change_msg").removeClass('hidden');
+        //$("#menu-reset").hideMenu();
+       // $("#menu-warning-reset").showMenu();
+        return false;
+    } else {
+        if (newpass != cnfpass) {
+            $("#change_msg").html("Wrong password confirmation!");
+            $("#change_msg").removeClass('hidden');
+            //$("#menu-reset").hideMenu();
+           // $("#menu-warning-reset").showMenu();
+            return false;
+        } else { 
+            $('#snackbar-9').toast('show');
+
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+
+            var raw = JSON.stringify({
+                "Token": code,
+                "Password": newpass,
+                "ConfirmPassword": cnfpass
+            });
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+            $("#load_reset").removeClass('hidden');
+            $("#btn_reset").addClass('hidden');
+            fetch("http://localhost:4000/accounts/reset-password", requestOptions)
+                .then(response => {
+                    if (!response.ok) {
+                        console.log('Network response was not ok');
+                        $("#load_reset").addClass('hidden');
+                        $("#btn_reset").removeClass('hidden');
+                        $("#menu-warning-1").showMenu();
+                    } 
+                    return response.text();
+                })
+                .then(result => {
+                    console.log("Result: "+result)
+                    if (result.message != "Invalid token") {
+                        location.href = "/login";
+                    } else {
+                        $("#menu-reset").hideMenu();
+                        $("#load_reset").addClass('hidden');
+                        $("#btn_reset").removeClass('hidden');
+                        $("#menu-warning-1").showMenu()
+                    }
+                })
+                .catch(error => {
+                    $("#menu-reset").hideMenu();
+                    $("#load_reset").addClass('hidden');
+                    $("#btn_reset").removeClass('hidden');
+                    $("#menu-warning-1").showMenu()
+                });
+
+        }
+    }
 }

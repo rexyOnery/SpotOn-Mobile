@@ -10,7 +10,7 @@
             <p class="font-600 color-highlight mb-n1">Reset Account</p>
             <h1 class="font-30">Forgot</h1>
             <p>
-                Enter your email addresse below and we'll send you the reset Instruction Code.
+                Answer the question below and we'll send you the reset Instruction Code.
             </p>
             <p>
                 Already have an instruction code? <a href="#" data-menu="menu-instruction-code" class="color-highlight"> Click here</a>
@@ -18,12 +18,33 @@
 
             <div class="input-style has-icon input-style-1 input-required">
                 <i class="input-icon fa fa-at"></i>
-                <span>Email</span>
+                <span>User Name</span>
                 <em>(required)</em>
-                <input type="name" id="confirm-email-address" placeholder="Email">
+                <input type="name" id="confirm-email-address" placeholder="User Name">
             </div>
 
-            <a href="javascript:sendInstructionCode();" class="btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s">Send Reset Instructions</a>
+            <div class="input-style has-icon input-style-1 input-required">
+                <i class="input-icon"></i>
+                <span>Select Your Secret Question</span>
+                <select id="secretquestion">
+                    <option value="What is your mother's maiden name?"> What is your mother's maiden name?</option>
+                    <option value="What was your first pet?"> What was your first pet?</option>
+                    <option value="What was the model of your first car?"> What was the model of your first car?</option>
+                    <option value="In what city were you born?"> In what city were you born?</option>
+                    <option value="What was your father's middle name?"> What was your father's middle name?</option>
+                    <option value="What was your childhood nickname?"> What was your childhood nickname?</option>
+                </select>
+            </div>
+            <div class="input-style has-icon input-style-1 input-required">
+                <i class="input-icon fa fa-angle-right"></i>
+                <span>Secret Answer</span>
+                <em>(required)</em>
+                <input type="name" id="answer" placeholder="Secret Answer">
+            </div>
+            <div id="load_spinner" style="float:right" class="spinner-border mb-4 mr-4 color-green-dark hidden" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <a href="javascript:sendInstructionCode();" id="in_Code" class="btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s">Send Reset Instructions</a>
 
             <div class="row pt-3 mb-0">
                 <div class="col-6 text-left">
@@ -43,10 +64,10 @@
 <div id="snackbar-9" class="snackbar-toast color-white bg-highlight color-white" data-autohide="true"><i class="fa fa-sync fa-spin mr-3"></i>Processing...</div>
 
 <div id="menu-instruction-code" class="menu menu-box-bottom rounded-m"
-     data-menu-height="250"
+     data-menu-height="300"
      data-menu-effect="menu-over">
     <div class="menu-title">
-        <p class="color-highlight">Let's get you into your account,</p>
+        <p class="color-highlight">Let's get you into your account. <br/>Check your email for the</p>
         <h1 class="font-24">Instruction Code</h1>
         <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
     </div>
@@ -58,14 +79,19 @@
             <em>(required)</em>
             <input type="name" id="instruction-code" placeholder="Enter Instruction Code">
         </div>
-        <a href="javascript:validateInstructionCode();" class="btn btn-full btn-m shadow-l rounded-s bg-highlight font-600 top-20">VALIDATE INSTRUCTION CODE</a>
+
+        <div id="load_instruction" style="float:right" class="spinner-border mb-4 mr-4 color-green-dark hidden" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div id="msg" class="hidden"></div>
+        <a href="javascript:validateInstructionCode();" id="vCode" class="btn btn-full btn-m shadow-l rounded-s bg-highlight font-600 top-20">VALIDATE INSTRUCTION CODE</a>
     </div>
 </div>
 
 
 <!---------------->
 <!---------------->
-<!--Menu Sign In-->
+<!--Menu Reset P-->
 <!---------------->
 <!---------------->
 <div id="menu-reset" class="menu menu-box-bottom rounded-m"
@@ -89,8 +115,11 @@
             <em>(required)</em>
             <input type="password" id="cnf-password" placeholder="Password Confirmation">
         </div>
-
-        <a href="javascript:changePassword();" class="btn btn-full btn-m shadow-l rounded-s font-600 bg-green-dark mt-4">Change Password</a>
+        <div id="load_reset" style="float:right" class="spinner-border mb-4 mr-4 color-green-dark hidden" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div id="change_msg"></div>
+        <a href="javascript:changePassword();" id="btn_reset" class="btn btn-full btn-m shadow-l rounded-s font-600 bg-green-dark mt-4">Change Password</a>
     </div>
 </div>
 
@@ -108,7 +137,7 @@
         You can continue with your previous actions.<br> The e-mail address is not with us.
     </p>
     <a href="#" class="close-menu btn btn-m btn-center-l button-s shadow-l rounded-s text-uppercase font-600 bg-white color-black">Hmmm, Check again?</a>
-</div> 
+</div>
 
 <div id="menu-warning-1" class="menu menu-box-bottom rounded-m"
      data-menu-height="185"
@@ -125,6 +154,25 @@
         </p>
     </div>
 </div>
-<script type="text/javascript" src="js/site.js"></script>
+
+
+<div id="menu-warning-reset"
+     class="menu menu-box-modal rounded-m"
+     data-menu-height="140"
+     data-menu-width="350">
+    <div class="menu-title">
+        <i class="fa fa-times-circle float-start me-3 scale-box ms-3 fa-4x color-red-dark"></i>
+        <p class="color-highlight">The task has</p>
+        <h1>Failed</h1>
+        <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+    </div>
+    <div class="content mb-0 mt-0">
+        <p class="pe-3">
+            This task has failed. Please verify the information you provided.
+        </p>
+    </div>
+</div>
+<script type="text/javascript" src="~/scripts/UtilityScript.js"></script>
+<script type="text/javascript" src="js/accountScript.js"></script>
 
 

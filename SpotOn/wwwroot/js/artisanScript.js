@@ -1,5 +1,5 @@
 ﻿
-
+localStorage.setItem('_footer_', 'foot 1');
 
 var getAllArtisans = () => {
 
@@ -399,26 +399,104 @@ var getArtisanDetail = () => {
                 $("#btnMoreTutorSubjects").removeClass('hidden');
                 $("#procreate").addClass('hidden');
             } else {
+                
                 data.forEach(item => {
-                    document.getElementById('bg_img').style = "background-image: url(" + item.photo + ")";
+
+                    document.getElementById('bg_img').style.backgroundImage = "url(" + item.photo + ")";
+                    //$("#small_pix").attr("src", item.photo);
                     $("#f_name").html(item.name.split(" ")[0]);
                     $("#l_name").html(item.name.split(" ")[1]);
                     $("#dash_location").html(item.location);
                     $("#dash_description").html(item.name + " is a/an " + item.category + " with SpotOn Artisan");
-                    $("#tel").html("<a href='tel:" + item.phone +"' class='btn btn-l font-14 shadow-l btn-full rounded-s font-600 bg-green-dark text-start mb-2'><span class='ms-n2'>Direct Line:</span><span class='float-end me-n1'>"+item.phone+"</span></a>")
-                   // $("#menu-call").showMenu();
+                    $("#tel").html("<a href='tel:" + item.phone + "' class='btn btn-l font-14 shadow-l btn-full rounded-s font-600 bg-green-dark text-start mb-2'><span class='ms-n2'>Direct Line:</span><span class='float-end me-n1'>" + item.phone + "</span></a>")
+                     $("#menu-call").showMenu();
                     $("#procreate").addClass('hidden');
                     $("#call_button").removeClass('hidden');
-                }) 
+                    
+                     
+                });
+               
+                getGallery(id);
                 
             }
         })
         .catch(error => {
+            console.log("error: "+error)
             $("#dash_description").html("Network Error! <a href='javascript: getArtisanDetail();'>Reload my profile</a>");
-            $("#btnMoreTutorSubjects").removeClass('hidden');
+           
             $("#procreate").addClass('hidden');
         });
 
+}
+
+var getGallery = (id) => {
+    
+    const options = {
+        headers: { 'Content-Type': 'application/json' },
+        method: 'GET',
+        redirect: 'follow'
+    };
+
+    $("#load_gallery").removeClass('hidden');
+    fetch(server_url + "/gallery/" + id, options)
+        .then(response => {
+            if (!response.ok) {
+                $("#dash_description").html("Network Error! <a href='javascript: loadGallery();'>Reload Gallery</a>");
+                $("#load_gallery").addClass('hidden');
+            }
+            return response.json();
+        })
+        .then(data => {
+           
+            if (data.length == 0) {
+                $("#gallery_container").html("");
+                $("#load_gallery").addClass('hidden');
+            } else {
+
+                var htm = "";
+                var i = 1;
+                data.forEach(item => {
+                     
+                    if (i == 1) {
+                        document.getElementById('gal_1').style.backgroundImage = "url(" + item.photo + ")";
+                        $("#d_1").html(item.dateAdded);
+                        $("#t_1").html(item.title);
+                        $("#decs_1").html(item.description);
+                    }
+                    if (i == 2) {
+                        document.getElementById('gal_2').style.backgroundImage = "url(" + item.photo + ")";
+                        $("#d_2").html(item.dateAdded);
+                        $("#t_2").html(item.title);
+                        $("#decs_2").html(item.description);
+                        $("#row_2").removeClass('hidden');
+                    }
+                    if (i == 3) {
+                        document.getElementById('gal_3').style.backgroundImage = "url(" + item.photo + ")";
+                        $("#d_3").html(item.dateAdded);
+                        $("#t_3").html(item.title);
+                        $("#decs_3").html(item.description);
+                        $("#row_3").removeClass('hidden');
+                    }
+                    if (i == 4) {
+                        document.getElementById('gal_4').style.backgroundImage = "url(" + item.photo + ")";
+                        $("#d_4").html(item.dateAdded);
+                        $("#t_4").html(item.title);
+                        $("#decs_4").html(item.description);
+                        $("#row_4").removeClass('hidden');
+                    }
+                    i++;
+                }); 
+                $("#load_gallery").addClass('hidden');
+                $("#_galShow").removeClass('hidden');
+                
+            }
+        })
+        .catch(error => {
+            $("#dash_description").html("Network Error! <a href='javascript: loadGallery();'>Reload Gallery</a>");
+            $("#load_gallery").addClass('hidden');
+        });
+
+    
 }
 
 var getArtisanDashBoard = () => {
@@ -440,23 +518,24 @@ var getArtisanDashBoard = () => {
             return response.json();
         })
         .then(data => {
-
+            
             if (data.length == 0) {
                 $("#dash_description").html("Something wrong! <a href='javascript: getArtisanDetail();'>Reload Artisan profile</a>");
                 $("#btnMoreTutorSubjects").removeClass('hidden');
                 $("#procreate").addClass('hidden');
             } else {
                 data.forEach(item => {
-                    document.getElementById('bg_img').style = "background-image: url(" + item.photo + ")";
+
+                    document.getElementById('bg_img').style.backgroundImage = "url(" + item.photo + ")";
                     $("#f_name").html(item.name.split(" ")[0]);
                     $("#l_name").html(item.name.split(" ")[1]);
                     $("#dash_location").html(item.location);
                     $("#dash_description").html(item.category + " with SpotOn Artisan");
-                    $("#tel").html("<a href='tel:" + item.phone + "' class='btn btn-l font-14 shadow-l btn-full rounded-s font-600 bg-green-dark text-start mb-2'><span class='ms-n2'>Direct Line:</span><span class='float-end me-n1'>" + item.phone + "</span></a>")
+                    $("#tel").html("<a href='tel:" + item.phone + "' class='btn btn-l font-14 shadow-l btn-full rounded-s font-600 bg-green-dark text-start mb-2'><span class='ms-n2'>Direct Line:</span><span class='float-end me-n1'>232" + item.phone + "</span></a>")
                     // $("#menu-call").showMenu();
                     $("#procreate").addClass('hidden'); 
                 })
-
+                loadGallery(id);
             }
         })
         .catch(error => {

@@ -915,37 +915,44 @@ function _displayItems(data) {
 }
 
 var _email = "";
-function sendInstructionCode() {
+var sendInstructionCode = () => {
     var email = document.getElementById('confirm-email-address').value.trim();
+    var answer = document.getElementById('answer').value.trim();
     _email = email;
+
     if (email == "") {
         $("#menu-warning-2").showMenu();
-    } else {
-        $('#snackbar-9').toast('show');
-        fetch(uri + "/passwordrecovery?email=" + email)
-            .then(response => {
-                if (!response.ok) {
-                    console.log('Network response was not ok');
-                    $('#snackbar-9').toast('hide');
-                    $("#menu-warning-2").showMenu();
-                }
-                else {
-                    $("#menu-instruction-code").showMenu();
-                }
-                return response.json();
-            })
-            .then(data => {
-                //$("#menu-warning-2").showMenu();
-                /* process your data further */
-            })
-            //.then(result => uploadOk(result))
-            .catch(error => {
-                $('#snackbar-9').toast('hide');
-
-                $("#menu-warning-2").showMenu();
-            });
-
+        return false;
     }
+    if (answer == "") {
+        $("#menu-warning-2").showMenu();
+        return false;
+    }
+    $('#snackbar-9').toast('show');
+    fetch(server_url + "/accounts/passwordrecovery/" + email)
+        .then(response => {
+            if (!response.ok) {
+                console.log('Network response was not ok');
+                $('#snackbar-9').toast('hide');
+                $("#menu-warning-2").showMenu();
+            }
+            else {
+                $("#menu-instruction-code").showMenu();
+            }
+            return response.json();
+        })
+        .then(data => {
+            //$("#menu-warning-2").showMenu();
+            /* process your data further */
+        })
+        //.then(result => uploadOk(result))
+        .catch(error => {
+            $('#snackbar-9').toast('hide');
+
+            $("#menu-warning-2").showMenu();
+        });
+
+
 }
 
 

@@ -26,47 +26,177 @@
         </div>
         <div class="card-overlay bg-gradient"></div>
     </div>
-
+    
     <div class="card card-style">
         <div class="content">
-            <p class="mb-n1 color-highlight font-600 font-12">Edit your Account</p>
-            <h4>More Subject(s)</h4>
-            <p>
-                Here, you can update your subject(s) by adding more subject(s) to it
-            </p> 
-
+            <h4>Galleries from Past Jobs</h4>
+            <p>Display all previous works that you have done. Maximum is 4</p>
+            <div class="row" id="gallery_containera">
+                <div class='col-6 hidden' id="h_6">
+                    <a href='#' data-menu='menu-option-6'><img id="pix_6" src="" width='300' height='330' class='img-fluid rounded-sm shadow-xl'></a>
+                </div>
+                <div class='col-6 hidden' id="h_7">
+                    <a href='#' data-menu='menu-option-7'><img id="pix_7" width='300' height='330' class='img-fluid rounded-sm shadow-xl'></a>
+                </div>
+                <div class='col-6 hidden' id="h_8">
+                    <a href='#' data-menu='menu-option-8'><img id="pix_8" width='300' height='330' class='img-fluid rounded-sm shadow-xl'></a>
+                </div>
+                <div class='col-6 hidden' id="h_9">
+                    <a href='#' data-menu='menu-option-9'><img id="pix_9" width='300' height='330' class='img-fluid rounded-sm shadow-xl'></a>
+                </div>
+            </div>
+        </div>
+        <div id="load_gallery" style="float:right" class="spinner-border mb-4 mr-4 color-green-dark" role="status">
+            <span class="sr-only">Loading...</span>
         </div>
     </div>
 
+
+
     <div class="card card-style" id="subjects">
         <div class="content">
-            <p class="mb-n1 color-highlight font-600 font-12">Enter</p>
-            <h4>Your Subjects</h4>
-            <p>
-                Enter the subject(s) you teach. Ensure that you spell the subject correctly for SpotOn search to be able find you.
-            </p>
-
-            <div class="divider"></div>
+            <p class="mb-n1 color-highlight font-600 font-12">Upload</p>
+            <h4>Your Gallery</h4>
             <div class="input-style input-style-2 input-required">
-                <span>Enter your subjects</span>
+                <span>Enter Title</span>
                 <em>(required)</em>
-                <input type="name" id="txtSubject" class="form-control" maxlength="120" placeholder="Enter subject(s). Spelling matters" />
+                <input type="name" id="txtTitle" class="form-control" maxlength="120" placeholder="Title of Gallery" />
             </div>
             <div class="divider"></div>
+            <div class="input-style input-style-2 input-required">
+                <span>Description</span>
+                <em>(required)</em>
+                <input type="name" id="txtDescribe" class="form-control" maxlength="120" placeholder="Describe the event" />
+            </div>
+            <div class="divider"></div>
+            <div class="file-data">
+                <img src="/images/empty.png" id="preview">
+                <input id="fileinput" type="file" class="upload-file bg-highlight shadow-s rounded-s " accept="image/*">
+                <p id="up" class="upload-file-text color-white">Upload Image</p>
+            </div>
 
             <div class="divider"></div>
             <div class="d-flex justify-content-center">
-                <div id="procreate" class="spinner-border color-green-dark hidden" role="status">
+                <div id="pro_create" class="spinner-border color-green-dark hidden" role="status">
                     <span class="sr-only">Loading...</span>
                 </div>
             </div>
-            <a href="javascript:MoreTutorSubjects();" id="btnMoreTutorSubjects" class="btn btn-full btn-m gradient-highlight rounded-s font-13 font-600 ">Add Subject</a>
 
         </div>
 
     </div>
 
 </div>
+
+<div id="timed-2"
+     class="menu menu-box-modal rounded-m"
+      
+     data-menu-height="160">
+    <h1 class="text-center fa-5x mt-2 pt-3 pb-2"><i class="fa fa-times-circle color-red-dark"></i></h1>
+    <h2 class="text-center">Deleting...</h2>
+</div>
+<!--------------->
+<!--------------->
+<!--Menu Option-->
+<!--------------->
+<!--------------->
+<div id="menu-option-6"
+     class="menu menu-box-modal rounded-m"
+     data-menu-height="250"
+     data-menu-width="350">
+    <div class="menu-title">
+        <i class="fa fa-question-circle scale-box float-start me-3 ms-3 fa-3x mt-1 color-blue-dark"></i>
+        <p class="color-highlight">We need to know,</p>
+        <h1 class="font-20">Are you Sure?</h1>
+        <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+    </div>
+    <div class="content mt-0">
+        <p class="pe-3">
+            Please confirm before proceeding to the next step.
+        </p>
+        <div class="row mb-0">
+            <div class="col-6">
+                <a href="#" class="btn close-menu btn-full btn-m bg-red-dark font-600 rounded-s">No, cancel</a>
+            </div>
+            <div class="col-6">
+                <a href="#" id="ref_6" class="btn btn-full btn-m bg-green-dark font-600 rounded-s">Yes, proceed!</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="menu-option-7"
+     class="menu menu-box-modal rounded-m"
+     data-menu-height="250"
+     data-menu-width="350">
+    <div class="menu-title">
+        <i class="fa fa-question-circle scale-box float-start me-3 ms-3 fa-3x mt-1 color-blue-dark"></i>
+        <p class="color-highlight">We need to know,</p>
+        <h1 class="font-20">Are you Sure?</h1>
+        <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+    </div>
+    <div class="content mt-0">
+        <p class="pe-3">
+            Please confirm before proceeding to the next step.
+        </p>
+        <div class="row mb-0">
+            <div class="col-6">
+                <a href="#" class="btn close-menu btn-full btn-m bg-red-dark font-600 rounded-s">No, cancel</a>
+            </div>
+            <div class="col-6">
+                <a href="#" id="ref_7" class="btn btn-full btn-m bg-green-dark font-600 rounded-s">Yes, proceed!</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="menu-option-8"
+     class="menu menu-box-modal rounded-m"
+     data-menu-height="250"
+     data-menu-width="350">
+    <div class="menu-title">
+        <i class="fa fa-question-circle scale-box float-start me-3 ms-3 fa-3x mt-1 color-blue-dark"></i>
+        <p class="color-highlight">We need to know,</p>
+        <h1 class="font-20">Are you Sure?</h1>
+        <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+    </div>
+    <div class="content mt-0">
+        <p class="pe-3">
+            Please confirm before proceeding to the next step.
+        </p>
+        <div class="row mb-0">
+            <div class="col-6">
+                <a href="#" class="btn close-menu btn-full btn-m bg-red-dark font-600 rounded-s">No, cancel</a>
+            </div>
+            <div class="col-6">
+                <a href="#" id="ref_8" class="btn btn-full btn-m bg-green-dark font-600 rounded-s">Yes, proceed!</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="menu-option-9"
+     class="menu menu-box-modal rounded-m"
+     data-menu-height="250"
+     data-menu-width="350">
+    <div class="menu-title">
+        <i class="fa fa-question-circle scale-box float-start me-3 ms-3 fa-3x mt-1 color-blue-dark"></i>
+        <p class="color-highlight">We need to know,</p>
+        <h1 class="font-20">Are you Sure?</h1>
+        <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+    </div>
+    <div class="content mt-0">
+        <p class="pe-3">
+            Please confirm before proceeding to the next step.
+        </p>
+        <div class="row mb-0">
+            <div class="col-6">
+                <a href="#" class="btn close-menu btn-full btn-m bg-red-dark font-600 rounded-s">No, cancel</a>
+            </div>
+            <div class="col-6">
+                <a href="#" id="ref_9" class="btn btn-full btn-m bg-green-dark font-600 rounded-s">Yes, proceed!</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Follow Menu -->
 <div id="menu-follow"
      class="menu menu-box-modal rounded-m"
@@ -114,8 +244,11 @@
     <a href="#" class="close-menu btn btn-m btn-center-l button-s shadow-l rounded-s text-uppercase font-600 bg-white color-black">Close</a>
 </div>
 
+
+
 <script type="text/javascript" src="~/scripts/UtilityScript.js"></script>
 <script type="text/javascript" src="~/js/artisanScript.js"></script>
+<script type="text/javascript" src="~/js/galleryScript.js"></script>
 <script type="text/javascript">
 
     if (localStorage.getItem("userid") == null)
