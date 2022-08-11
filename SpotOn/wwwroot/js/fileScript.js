@@ -63,7 +63,7 @@ var upload = () => {
             var raw = JSON.stringify({
                 "Photo": dataurl
             });
-            console.log(dataurl)
+           // console.log(dataurl)
 
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");

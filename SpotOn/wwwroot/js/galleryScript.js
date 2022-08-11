@@ -154,7 +154,7 @@ var loadGallery = (id) => {
             return response.json();
         })
         .then(data => {
-            console.log(data)
+           // console.log(data)
             if (data.length == 0) {
                 $("#gallery_container").html("<p>Here, you can update your client(s) of your past jobs in pictures</p>");
                 $("#load_gallery").addClass('hidden');

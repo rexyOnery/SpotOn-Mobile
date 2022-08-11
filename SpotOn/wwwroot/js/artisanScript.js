@@ -1,4 +1,5 @@
 ﻿
+
 localStorage.setItem('_footer_', 'foot 1');
 
 var getAllArtisans = () => {
@@ -10,17 +11,31 @@ var getAllArtisans = () => {
 
     fetch(server_url + "/artisan/pages", requestOptions)
         .then(response => response.text())
-        .then(result => runTutorPages(result))
+        .then(result => runArtisanPages(result))
+        .catch(error => console.log('error', error));
+
+}
+
+var getAllArtisanTypes = (id) => {
+
+    var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+    };
+
+    fetch(server_url + "/artisan/pages/"+id, requestOptions)
+        .then(response => response.text())
+        .then(result => runArtisanPagedPages(result))
         .catch(error => console.log('error', error));
 
 }
 
 var forwardPaging = false;
 var backPaging = false;
-var runTutorPages = (pages) => {
-    var _ult = parseInt(pages) - 1;
+var runArtisanPages = (pages) => {
+    var _ult = parseInt(pages);
 
-    if (_ult > 0) {
+    if (_ult > 1) {
         localStorage.setItem("allTimePages", _ult);
         localStorage.setItem("currentVisiblePages", 4);
         localStorage.setItem("hide", 0);
@@ -57,6 +72,48 @@ var runTutorPages = (pages) => {
     }
 }
 
+
+var runArtisanPagedPages = (pages) => {
+    var _ult = parseInt(pages)  
+    $("#page-items").html("");
+    if (_ult > 1) {
+        localStorage.setItem("allTimePages", _ult);
+        localStorage.setItem("currentVisiblePages", 4);
+        localStorage.setItem("hide", 0);
+        localStorage.setItem("show", 5);
+
+        var paging = "";
+        $("#page-items").html(paging);
+        paging += "<li class='page-item'>"
+        paging += "<a class='page-link rounded-xs color-black bg-transparent bg-theme shadow-xl border-0' href='javascript:doPrevious();' tabindex='-1' aria-disabled='true'><i class='fa fa-angle-left'></i></a>"
+        paging += "</li>";
+
+        for (i = 0; i <= _ult; i++) {
+            var num = parseInt(i + 1);
+            if (i == 0) {
+                localStorage.setItem("currentPage", i);
+                paging += "<li id='page-" + i + "' class='page-item active'><a class='page-link rounded-xs color-black bg-highlight shadow-l border-0' href='javascript:artisanPaged(" + i + ");'>" + num + "</a></li>";
+
+            }
+            else if (i == pages) {
+                localStorage.setItem("lastitem", i);
+                paging += "<li id='page-" + i + "' class='page-item hidden'><a class='page-link rounded-xs color-black bg-theme shadow-l border-0' href='javascript:artisanPaged(" + i + ");'>" + num + "</a></li>";
+            }
+            else if (i <= 4) {
+                paging += "<li id='page-" + i + "' class='page-item'><a class='page-link rounded-xs color-black bg-theme shadow-l border-0' href='javascript:artisanPaged(" + i + ");'>" + num + "</a></li>";
+            } else {
+                forwardPaging = true;
+                paging += "<li id='page-" + i + "' class='page-item hidden'><a class='page-link rounded-xs color-black bg-theme shadow-l border-0' href='javascript:artisanPaged(" + i + ");'>" + num + "</a></li>";
+            }
+        }
+        paging += "<li class='page-item'>"
+        paging += "<a class='page-link rounded-xs color-black bg-transparent bg-theme shadow-l border-0' href='javascript:doArtisanNext();'><i class='fa fa-angle-right'></i></a>"
+        paging += "</li>"
+
+        $("#page-items").html(paging);
+    }
+}
+
 var artisanPage = (id) => {
 
     var _prevPage = localStorage.getItem("currentPage");
@@ -68,7 +125,35 @@ var artisanPage = (id) => {
     if (_prevPage != id) {
         $("#item-preloader").removeClass('hidden');
 
-        fetch(server_url + "/artisan/pagedartisans/" + id + "/10")
+        fetch(server_url + "/artisan/pagedartisans/" + id + "/5")
+            .then(response => response.json())
+            .then(data => _displayArtisanItems(data))
+            .catch(error => console.error('Unable to get items.', error));
+
+        $(_prev_Page).removeClass('active');
+        $(_prev_Page_a).removeClass('bg-highlight');
+        $(_prev_Page_a).addClass('bg-theme');
+
+        $(_curPage).addClass('active');
+        $(_curPage_a).addClass('bg-highlight');
+        $(_curPage_a).removeClass('bg-theme');
+
+        localStorage.setItem("currentPage", id);
+    }
+}
+
+var artisanPaged = (id) => {
+    console.log(_artisanFilter)
+    var _prevPage = localStorage.getItem("currentPage");
+    var _prev_Page = "#page-" + _prevPage;
+    var _prev_Page_a = "#page-" + _prevPage + " a";
+
+    var _curPage = "#page-" + id;
+    var _curPage_a = "#page-" + id + " a";
+    if (_prevPage != id) {
+        $("#item-preloader").removeClass('hidden');
+
+        fetch(server_url + "/artisan/pagedartisanstype/" + _artisanFilter+"/" + id + "/5")
             .then(response => response.json())
             .then(data => _displayArtisanItems(data))
             .catch(error => console.error('Unable to get items.', error));
@@ -130,9 +215,9 @@ var doArtisanNext = () => {
     var currVisiblePage = parseInt(localStorage.getItem("currentVisiblePages"));
     var lastItem = parseInt(localStorage.getItem("lastitem"));
 
-    console.log("all: " + allPages);
+    //console.log("all: " + allPages);
     //console.log("last: " + lastItem);
-    console.log("Cur Vis: " + currVisiblePage);
+    //console.log("Cur Vis: " + currVisiblePage);
 
     var hide = localStorage.getItem("hide");
     var show = localStorage.getItem("show");
@@ -168,7 +253,7 @@ var getArtisanItems = () => {
         redirect: 'follow'
     };
 
-    fetch(server_url + "/artisan/pagedartisans/0/10", requestOptions)
+    fetch(server_url + "/artisan/pagedartisans/0/5", requestOptions)
         .then(response => {
             if (!response.ok) {
                 console.log('Network response was not ok');
@@ -248,10 +333,10 @@ var getArtisansByType = (id) => {
         method: 'GET',
         redirect: 'follow'
     };
-
+    
     $("#docItems").html("");
     $("#item-preloader").removeClass("hidden");
-    fetch(server_url + "/artisan/paged-artisans-typeid/" + id + "/0/10", requestOptions)
+    fetch(server_url+"/artisan/paged-artisans-typeid/" + id + "/0/5", requestOptions)
         .then(response => {
             if (!response.ok) {
                 console.log('Network response was not ok');
@@ -266,7 +351,7 @@ var getArtisansByType = (id) => {
 
 var filterArtisan = () => {
 
-
+    $("#page-items").html("");
 
     var locationid = document.getElementById('lga').value.trim();
     var location = document.getElementById('location').value.trim();

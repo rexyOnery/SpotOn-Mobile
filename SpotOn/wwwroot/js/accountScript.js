@@ -41,7 +41,7 @@
         fetch(server_url + "/userstate", requestOptions)
             .then(response => response.json())
             .then(result => {
-                console.log(result);
+                //console.log(result);
                 var htm = '';
 
                 result.forEach(item => {
@@ -123,7 +123,7 @@ var register = () => {
         "AccountType": $("#account_type").val(),
         "AcceptTerms": true
     });
-    console.log(raw)
+    //console.log(raw)
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("origin", "http://africafashionvillage.com");
@@ -205,7 +205,7 @@ var authenticate = () => {
             return response.json();
         })
         .then(result => {
-            console.log(result)
+            //console.log(result)
             if (result.message != null) {
                 $("#msg").html(result.message + "<br /> Please check for typo error(s)!.");
                 $("#menu-warning-2").showMenu();
@@ -214,6 +214,7 @@ var authenticate = () => {
                 document.getElementById("btnIOS").style.pointerEvents = "auto";
             } else {
                 localStorage.setItem("userid", result.id);
+                localStorage.setItem("user_email", result.email);
                 if (result.isVerified) {
                     if (result.role == 'User') {
                         getUser(result.id);
@@ -252,9 +253,9 @@ var getUser = (id) => {
                 $("#msg").html("Ooops! Something went wrong. Please try again.");
                 $('#menu-warning-2').showMenu();
             }
-            else {
-                return response.json();
-            }
+            
+            return response.json();
+            
         })
         .then(result => {
             if (result == null) {
@@ -269,7 +270,7 @@ var getUser = (id) => {
 
 
                 localStorage.setItem("UserData", JSON.stringify(CartRef));
-                console.log(JSON.parse(localStorage.getItem("UserData")));
+                //console.log(JSON.parse(localStorage.getItem("UserData")));
 
                  location.href = "/artisan/";
 
@@ -463,7 +464,7 @@ var create_artisan = () => {
             }
         })
         .then(result => {
-            console.log(result)
+            //console.log(result)
             if (result.message == true) {
                 location.href = "/artisan/photo";
             } else {
@@ -562,7 +563,7 @@ var create_user = () => {
             }
         })
         .then(result => {
-            console.log(result)
+           // console.log(result)
             if (result.message == true) {
                 location.href = "/artisan";
                 //location.href = "/artisan/photo";
@@ -626,7 +627,7 @@ var sendInstructionCode = () => {
         })
         .then(data => {
 
-            console.log(data)
+            //console.log(data)
             if (data.message == "false") {
                 $("#menu-warning-2").showMenu();
                 $("#load_spinner").addClass('hidden');
@@ -758,7 +759,7 @@ var changePassword = () => {
                     return response.text();
                 })
                 .then(result => {
-                    console.log("Result: "+result)
+                    //console.log("Result: "+result)
                     if (result.message != "Invalid token") {
                         location.href = "/login";
                     } else {
