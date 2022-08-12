@@ -316,10 +316,10 @@ var getArtisan = (id) => {
             result = result.length ? JSON.parse(result) : { "message":"Artisan not found"}
             
             if (result.message == "Artisan not found") {
-                location.href = '/artisan/addartisan';
+                location.href = '/artisan/adddetails';
             } else {
                 if (result.photo == null) {
-                    location.href = "/artisan/photo"
+                    location.href = "/artisan/addphoto"
                 } else {
                     
                     var TomorrowDate = new Date(result.dateApproved);

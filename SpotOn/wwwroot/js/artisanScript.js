@@ -492,7 +492,7 @@ var getArtisanDetail = () => {
                     $("#f_name").html(item.name.split(" ")[0]);
                     $("#l_name").html(item.name.split(" ")[1]);
                     $("#dash_location").html(item.location);
-                    $("#dash_description").html(item.name + " is a/an " + item.category + " with SpotOn Artisan");
+                    $("#dash_description").html(item.category + " with SpotOn Artisan");
                     $("#tel").html("<a href='tel:" + item.phone + "' class='btn btn-l font-14 shadow-l btn-full rounded-s font-600 bg-green-dark text-start mb-2'><span class='ms-n2'>Direct Line:</span><span class='float-end me-n1'>" + item.phone + "</span></a>")
                      $("#menu-call").showMenu();
                     $("#procreate").addClass('hidden');
